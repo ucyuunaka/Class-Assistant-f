@@ -6,7 +6,7 @@ import { ThemeManager } from "/js/themes.js";
 
 document.addEventListener("DOMContentLoaded", function () {
 // 检查首次登录体验
-//   checkFirstLoginExperience(); // 调试时临时注释掉
+  checkFirstLoginExperience(); // 调试时临时注释掉
   // 初始化滚动动画
   initScrollAnimation(".animate-on-scroll", {
     threshold: 0.1,

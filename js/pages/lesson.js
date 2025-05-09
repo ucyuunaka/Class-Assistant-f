@@ -26,7 +26,7 @@ let usingFallbackPicker = false; // 标记是否使用备用emoji选择器
 // 初始化函数
 document.addEventListener("DOMContentLoaded", function () {
 // 检查首次登录体验
-//   checkFirstLoginExperience(); // 调试时临时注释掉
+  checkFirstLoginExperience(); // 调试时临时注释掉
   // 尝试获取通知功能
   if (window.showNotification) {
     showNotification = window.showNotification;
