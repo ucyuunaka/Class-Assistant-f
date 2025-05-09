@@ -61,34 +61,7 @@
 
 /* 课程选择框样式 */
 .course-select {
-  grid-column: 1 / 2;
-  width: 100%;
-  padding: 0.9rem 1.2rem;
-  border-radius: 12px;
-  border: 2px solid var(--border-color);
-  background-color: var(--background-input);
-  color: var(--text-color);
-  font-family: inherit;
-  font-size: 1rem;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236e7781' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 16px 16px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  margin-bottom: 1rem;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
-}
-
-.course-select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px var(--primary-light);
-}
-
-.course-select:hover {
-  border-color: var(--primary-light);
+  display: none;
 }
 
 /* 评价输入框 */
@@ -811,6 +784,27 @@
     padding-top: 0.75rem;
     margin-top: 0.75rem;
   }
+
+  .select2-container--default .select2-selection--single,
+  .icon-btn {
+    height: 42px;
+  }
+  
+  .select2-container--default
+    .select2-selection--single
+    .select2-selection__clear {
+    margin-right: 2rem;
+    width: 18px;
+    height: 18px;
+    right: 26px;
+  }
+  
+  .select2-container--default
+    .select2-selection--single
+    .select2-selection__arrow {
+    right: 5px;
+    height: 42px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -906,22 +900,32 @@
 
 /* 自定义Select2下拉框样式以匹配应用主题 */
 .select2-container--default .select2-selection--single {
-  background-color: var(--background-input);
+  background-color: var(--background-secondary);
   border: 2px solid var(--border-color);
   border-radius: 12px;
   height: 45px;
   display: flex;
   align-items: center;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+  box-shadow: none;
   transition: all 0.3s ease;
+}
+
+.select2-container--default .select2-selection--single:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .select2-container--default
   .select2-selection--single
   .select2-selection__rendered {
-  color: var(--text-color);
+  color: var(--text-secondary);
+  font-size: 1rem;
   line-height: normal;
   padding-left: 1.2rem;
+  padding-right: 2.5rem;
 }
 
 /* 关闭按钮样式覆盖 */
@@ -929,18 +933,23 @@
   .select2-selection--single
   .select2-selection__clear {
   font-size: 1.1rem;
-  margin-right: 2.2rem;
+  margin-right: 2.5rem;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.05);
   color: var(--text-secondary);
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.7;
   transition: all 0.25s ease;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
 }
 
 .select2-container--default
@@ -949,21 +958,63 @@
   background-color: rgba(220, 53, 69, 0.1);
   color: var(--danger-color);
   opacity: 1;
-  transform: scale(1.1);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .select2-container--default
   .select2-selection--single
   .select2-selection__arrow {
   height: 45px;
+  width: 30px;
+  right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow b {
+  border-color: var(--text-secondary) transparent transparent transparent;
+  border-width: 5px 4px 0 4px;
+  margin-top: 2px;
+}
+
+/* 添加内部光效，模拟表情按钮效果 */
+.select2-container--default .select2-selection--single::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 0.5s;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.select2-container--default .select2-selection--single:hover::after {
+  opacity: 0.6;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* 下拉框样式 */
 .select2-dropdown {
   background-color: var(--background-secondary);
   border: 2px solid var(--primary-light);
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  margin-top: 4px;
+}
+
+/* 改进下拉选项样式 */
+.select2-container--default .select2-results__option {
+  padding: 8px 12px;
+  transition: all 0.2s ease;
 }
 
 .select2-container--default
@@ -978,6 +1029,28 @@
   color: white;
 }
 
+/* 搜索框样式改进 */
+.select2-container--default
+  .select2-search--dropdown
+  .select2-search__field {
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 8px;
+  width: calc(100% - 16px);
+  background-color: var(--background-input);
+  color: var(--text-color);
+}
+
+.select2-container--default
+  .select2-search--dropdown
+  .select2-search__field:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+/* 优化选项组样式 */
 .select2-container--default .select2-results__group {
   background-color: var(--background-secondary);
   color: var(--text-secondary);
@@ -987,19 +1060,78 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.select2-container--default
-  .select2-search--dropdown
-  .select2-search__field {
-  border: 2px solid var(--border-color);
-  border-radius: 8px;
-  padding: 8px 12px;
-  margin-bottom: 5px;
+/* 确保Select2容器宽度正确 */
+.select2-container {
+  width: 100% !important;
+}
+
+/* 改进课程选择框样式 */
+.course-select {
+  display: none;
+}
+
+/* 移动端适配优化 */
+@media (max-width: 768px) {
+  .select2-container--default .select2-selection--single {
+    height: 42px;
+  }
+  
+  .select2-container--default
+    .select2-selection--single
+    .select2-selection__clear {
+    margin-right: 2rem;
+    width: 18px;
+    height: 18px;
+    right: 26px;
+  }
+  
+  .select2-container--default
+    .select2-selection--single
+    .select2-selection__arrow {
+    right: 5px;
+    height: 42px;
+  }
+}
+
+.select2-container--default .select2-selection--single:focus,
+.select2-container--open .select2-selection--single {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  outline: none;
+}
+
+.select2-container--default .select2-selection--single:active {
+  transform: translateY(0);
 }
 
 .select2-container--default
-  .select2-search--dropdown
-  .select2-search__field:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px var(--primary-light);
+  .select2-selection--single
+  .select2-selection__rendered {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: normal;
+  padding-left: 1.2rem;
+  padding-right: 2.5rem;
+}
+
+.select2-container--default .select2-selection--single:hover .select2-selection__rendered {
+  color: var(--primary-color);
+  position: relative;
+  z-index: 2;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.select2-container--default .select2-selection--single:hover .select2-selection__arrow b {
+  border-color: var(--primary-color) transparent transparent transparent;
+}
+
+/* 确保图标在Select2环境中垂直居中 */
+.select2-container--default .select2-selection--single i {
+  position: relative;
+  z-index: 2;
+  vertical-align: middle;
 }
