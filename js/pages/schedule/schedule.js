@@ -68,13 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const sidebar = new Sidebar("sidebar-container");
   const header = new Header("header-container", {
     title: "我的课程表",
-    subtitle: "管理并安排课程，清晰掌握每周学习时间",
-    buttons: [
-      {
-        text: "添加课程",
-        url: "#",
-        id: "add-course-header-btn"
-      }
-    ],
+    subtitle: "管理并安排课程，清晰掌握每周学习时间"
   });
 });
