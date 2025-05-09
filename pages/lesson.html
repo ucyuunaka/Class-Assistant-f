@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>课评速记 - 课堂助手</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/themes/themes.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/pages/lesson.css" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  </head>
+  <body>
+    <!-- 侧边栏导航 -->
+    <div id="sidebar-container"></div>
+
+    <!-- 移动端遮罩层 -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- 主内容区 -->
+    <div class="container py-4 sidebar-active">
+      <!-- 顶栏容器 -->
+      <div id="header-container"></div>
+
+      <div class="lesson-container">
+        <!-- 输入区域 -->
+        <div class="input-card animate-on-scroll fade-up">
+          <div class="input-header">
+            <i class="ri-chat-new-line"></i>
+            <h2 class="input-title">记录新评价</h2>
+          </div>
+          <div class="input-content">
+            <select
+              class="course-select"
+              id="courseSelect"
+              data-placeholder="选择课程..."
+            >
+              <option value="">选择课程...</option>
+              <!-- 课程选项将由JS动态添加 -->
+            </select>
+            <div class="input-actions">
+              <button class="icon-btn" id="emojiButton" title="选择表情">
+                <i class="ri-emotion-happy-line"></i>
+              </button>
+            </div>
+            <textarea
+              id="commentInput"
+              class="comment-input"
+              placeholder="输入你的评价文字（可选）..."
+            ></textarea>
+          </div>
+
+          <div class="predefined-tags-container" id="predefinedTags">
+            <span class="tag-label">快捷标签:</span>
+            <!-- 预设标签将由JS动态添加 -->
+          </div>
+
+          <div class="reaction-tag-container" id="selectedReactions">
+            <!-- 已选表情会显示在这里 -->
+          </div>
+
+          <div class="text-center mt-3">
+            <button class="send-btn" id="sendButton">
+              <i class="ri-send-plane-fill"></i> 发送评价
+            </button>
+          </div>
+        </div>
+
+        <!-- 历史评价部分 -->
+        <div class="history-card animate-on-scroll fade-up delay-100">
+          <div class="history-header">
+            <i class="ri-history-line"></i>
+            <h2 class="history-title">历史评价</h2>
+            <div class="history-actions">
+              <span class="history-filter-info">点击表情可互动</span>
+            </div>
+          </div>
+
+          <div id="commentList" class="comment-list">
+            <!-- 评价将通过JavaScript动态添加 -->
+            <div class="lesson-empty animate-on-scroll zoom-in">
+              <div class="lesson-empty-icon">
+                <i class="ri-chat-3-line"></i>
+              </div>
+              <div class="lesson-empty-text">还没有匹配的课程评价</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 表情选择器容器 -->
+    <div class="emoji-picker-container" id="emojiPickerContainer"></div>
+
+    <!-- 页脚 -->
+    <footer class="footer"></footer>
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/js/themes.js"></script>
+    <script type="module" src="/components/sidebar/sidebar.js"></script>
+    <script type="module" src="/components/header/header.js"></script>
+    <script type="module" src="/components/buttons/buttons.js"></script>
+    <script type="module" src="/components/footer/footer.js"></script>
+    <script
+      type="module"
+      src="/components/scrollAnimation/scrollAnimation.js"
+    ></script>
+    <script
+      type="module"
+      src="/components/notifications/notifications.js"
+    ></script>
+    <script type="module" src="/js/pages/lesson.js"></script>
+  </body>
+</html>

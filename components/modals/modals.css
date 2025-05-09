@@ -1,0 +1,369 @@
+/* ==========================================================================
+   模态弹窗组件 (Modal Component)
+   ========================================================================== */
+/*
+ * 这个文件包含了模态弹窗组件的所有样式，用于创建各种类型的弹出窗口
+ * 支持多种尺寸、类型和按钮布局选项
+ */
+
+/* ==========================================================================
+   基础模态弹窗样式 (Base Modal Styles)
+   ========================================================================== */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* 确保在页面内容之上 */
+  pointer-events: none; /* 初始状态下不响应点击 */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* 激活的模态弹窗 */
+.modal-container.active {
+  opacity: 1;
+  pointer-events: all; /* 激活后可以响应点击 */
+}
+
+/* 模态弹窗内容 */
+.modal-content {
+  background-color: #fff; /* 明确的背景颜色 */
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 95%;
+  max-width: 500px; /* 默认最大宽度 */
+  max-height: 90vh; /* 防止在小屏幕上超出视口 */
+  overflow-y: auto; /* 内容过多时可滚动 */
+  padding: 0;
+  transform: scale(0.9); /* 初始缩小状态，用于动画 */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* 添加透明度过渡 */
+  position: relative;
+  z-index: 1; /* 确保在容器背景之上 */
+  opacity: 0; /* 开始时隐藏 */
+}
+
+/* 激活时的内容动画 */
+.modal-container.active .modal-content {
+  transform: scale(1);
+  opacity: 1; /* 变为可见 */
+}
+
+/* ==========================================================================
+   模态弹窗头部 (Modal Header)
+   ========================================================================== */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* 没有边框的头部 */
+.modal-header.no-border {
+  border-bottom: none;
+}
+
+/* 模态弹窗标题 */
+.modal-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* 关闭按钮 */
+.modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 1rem;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  color: var(--text-color);
+}
+
+/* ==========================================================================
+   模态弹窗内容区 (Modal Body)
+   ========================================================================== */
+.modal-body {
+  padding: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* 紧凑型正文 */
+.modal-body.compact {
+  padding: 1rem 1.5rem;
+}
+
+/* ==========================================================================
+   模态弹窗底部 (Modal Footer)
+   ========================================================================== */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end; /* 默认按钮右对齐 */
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* 没有边框的底部 */
+.modal-footer.no-border {
+  border-top: none;
+}
+
+/* 底部按钮对齐变体 */
+/* 居中对齐的底部按钮 */
+.modal-footer.centered {
+  justify-content: center;
+}
+
+/* 均匀分布的底部按钮 */
+.modal-footer.spaced {
+  justify-content: space-between;
+}
+
+/* 左对齐的底部按钮 */
+.modal-footer.left {
+  justify-content: flex-start;
+}
+
+/* 垂直排列的底部按钮（适合移动端）*/
+.modal-footer.stacked {
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   模态弹窗按钮 (Modal Buttons)
+   ========================================================================== */
+.modal-btn {
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* 主要按钮 */
+.modal-btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.modal-btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+/* 危险按钮 */
+.modal-btn-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.modal-btn-danger:hover {
+  background-color: #c53030; /* 深红色 */
+}
+
+/* 成功按钮 */
+.modal-btn-success {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.modal-btn-success:hover {
+  background-color: #0da271; /* 深绿色 */
+}
+
+/* 警告按钮 */
+.modal-btn-warning {
+  background-color: var(--warning-color);
+  color: white;
+}
+
+.modal-btn-warning:hover {
+  background-color: #e08e00; /* 深橙色 */
+}
+
+/* 次要按钮 */
+.modal-btn-secondary {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.modal-btn-secondary:hover {
+  background-color: var(--background-secondary);
+}
+
+/* ==========================================================================
+   模态弹窗尺寸变体 (Modal Size Variants)
+   ========================================================================== */
+.modal-sm .modal-content {
+  max-width: 400px; /* 小型弹窗 */
+}
+
+.modal-lg .modal-content {
+  max-width: 700px; /* 大型弹窗 */
+}
+
+.modal-xl .modal-content {
+  max-width: 900px; /* 超大型弹窗 */
+}
+
+.modal-fullscreen .modal-content {
+  max-width: none;
+  width: 95%;
+  height: 95%; /* 全屏弹窗，保留少量边距 */
+}
+
+/* ==========================================================================
+   模态弹窗类型变体 (Modal Type Variants)
+   ========================================================================== */
+/* 信息类型 */
+.modal-info .modal-header {
+  border-bottom-color: var(--primary-light);
+}
+
+.modal-info .modal-title {
+  color: var(--primary-color);
+}
+
+/* 成功类型 */
+.modal-success .modal-header {
+  border-bottom-color: rgba(49, 196, 141, 0.3); /* 淡绿色边框 */
+}
+
+.modal-success .modal-title {
+  color: var(--success-color);
+}
+
+/* 警告类型 */
+.modal-warning .modal-header {
+  border-bottom-color: rgba(253, 176, 34, 0.3); /* 淡黄色边框 */
+}
+
+.modal-warning .modal-title {
+  color: var(--warning-color);
+}
+
+/* 危险类型 */
+.modal-danger .modal-header {
+  border-bottom-color: rgba(229, 62, 62, 0.3); /* 淡红色边框 */
+}
+
+.modal-danger .modal-title {
+  color: var(--danger-color);
+}
+
+/* ==========================================================================
+   带图标的模态弹窗 (Modal with Icons)
+   ========================================================================== */
+.modal-icon {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5rem;
+}
+
+.modal-icon i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* 不同类型图标的颜色 */
+.modal-info .modal-icon i {
+  color: var(--primary-color);
+}
+
+.modal-success .modal-icon i {
+  color: var(--success-color);
+}
+
+.modal-warning .modal-icon i {
+  color: var(--warning-color);
+}
+
+.modal-danger .modal-icon i {
+  color: var(--danger-color);
+}
+
+/* ==========================================================================
+   动画效果 (Animation Effects)
+   ========================================================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   响应式调整 (Responsive Adjustments)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%; /* 确保在小屏幕上有适当的边距 */
+  }
+  
+  .modal-footer {
+    flex-direction: column; /* 在移动设备上垂直排列按钮 */
+  }
+  
+  .modal-btn {
+    width: 100%; /* 按钮占满宽度 */
+    margin-bottom: 0.5rem;
+  }
+  
+  .modal-footer .modal-btn:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* TODO: 增加深色模式支持 */
+/* 
+@media (prefers-color-scheme: dark) {
+  .modal-content {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+  }
+  
+  .modal-header {
+    border-bottom-color: var(--dark-border);
+  }
+  
+  .modal-footer {
+    border-top-color: var(--dark-border);
+  }
+}
+*/

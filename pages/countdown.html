@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>考试倒计时 - 课堂助手</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/themes/themes.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/pages/countdown.css" />
+
+  </head>
+  <body>
+    <!-- 侧边栏导航 -->
+    <div id="sidebar-container"></div>
+
+    <!-- 移动端菜单切换按钮 -->
+
+    <!-- 移动端遮罩层 -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- 主内容区 -->
+    <div class="container py-4 sidebar-active">
+      <!-- 顶栏容器 - 添加ID用于组件初始化 -->
+      <div id="header-container"></div>
+
+      <!-- 筛选和排序 -->
+      <div class="filters animate-on-scroll fade-up">
+        <div class="search-box">
+          <i class="fas fa-search search-icon"></i>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="搜索考试..."
+            id="search-input"
+          />
+        </div>
+        <div class="filter-options">
+          <div class="filter-group">
+            <span class="filter-label">排序：</span>
+            <select class="form-control" id="sort-select">
+              <option value="date-asc">日期升序</option>
+              <option value="date-desc" selected>日期降序</option>
+              <option value="name-asc">名称升序</option>
+              <option value="name-desc">名称降序</option>
+            </select>
+            <button
+              type="button"
+              class="btn-clear"
+              id="clear-sort"
+              aria-label="清除排序"
+            >
+              <i class="fas fa-times-circle"></i>
+            </button>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">状态：</span>
+            <select class="form-control" id="filter-select">
+              <option value="all" selected>全部</option>
+              <option value="urgent">紧急 (7天内)</option>
+              <option value="upcoming">即将到来 (30天内)</option>
+              <option value="distant">较远 (30天以上)</option>
+            </select>
+            <button
+              type="button"
+              class="btn-clear"
+              id="clear-filter"
+              aria-label="清除筛选"
+            >
+              <i class="fas fa-times-circle"></i>
+            </button>
+          </div>
+        </div>
+        <!-- 添加筛选反馈区 -->
+        <div class="filter-feedback" id="filter-feedback">
+          正在显示符合条件的考试
+        </div>
+      </div>
+
+      <!-- 考试倒计时列表 -->
+      <div class="countdown-list" id="countdown-list">
+        <!-- 动态生成 -->
+        <div class="loading-indicator" id="loading-indicator">
+          <i class="fas fa-circle-notch fa-spin"></i>
+          <p>加载中...</p>
+        </div>
+      </div>
+
+      <!-- 无考试时显示的空状态 -->
+      <div
+        class="empty-state animate-on-scroll fade-up hidden"
+        id="empty-state"
+      >
+        <div class="empty-icon">
+          <i class="fas fa-calendar-xmark"></i>
+        </div>
+        <h3>暂无考试数据</h3>
+        <p>点击"添加考试"按钮创建你的第一个考试倒计时</p>
+        <button class="btn btn-primary" id="add-exam-empty">
+          <i class="fas fa-plus"></i> 添加考试
+        </button>
+      </div>
+    </div>
+
+    <!-- 添加/编辑考试弹框 -->
+    <div class="modal-container" id="exam-modal">
+      <div class="modal-content">
+        <div class="modal-close" id="close-exam-modal" aria-label="关闭">×</div>
+        <h2 class="modal-title" id="modal-title">添加考试</h2>
+        <form id="exam-form">
+          <div class="form-group">
+            <label class="form-label" for="exam-name">考试名称</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exam-name"
+              required
+              placeholder="例如：高等数学期末考试"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exam-subject">科目</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exam-subject"
+              placeholder="例如：高等数学"
+            />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="exam-date">考试日期</label>
+              <input type="date" class="form-control" id="exam-date" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="exam-time">考试时间</label>
+              <input type="time" class="form-control" id="exam-time" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exam-location">考试地点</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exam-location"
+              placeholder="例如：教学楼A-301"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exam-notes">备注</label>
+            <textarea
+              class="form-control"
+              id="exam-notes"
+              rows="3"
+              placeholder="例如：考试范围、注意事项等"
+            ></textarea>
+          </div>
+          <input type="hidden" id="exam-id" value="" />
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" id="cancel-exam">
+              取消
+            </button>
+            <button type="submit" class="btn btn-primary">保存</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 撤销操作按钮 -->
+    <button class="undo-btn hidden" id="undo-btn">
+      <i class="fas fa-undo-alt"></i> 撤销删除
+    </button>
+
+    <!-- 页脚 -->
+    <footer class="footer"></footer>
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/components/sidebar/sidebar.js"></script>
+    <script type="module" src="/components/header/header.js"></script>
+    <script type="module" src="/components/buttons/buttons.js"></script>
+    <script type="module" src="/components/footer/footer.js"></script>
+    <script
+      type="module"
+      src="/components/scrollAnimation/scrollAnimation.js"
+    ></script>
+    <script
+      type="module"
+      src="/components/notifications/notifications.js"
+    ></script>
+    <script type="module" src="/js/themes.js"></script>
+    <script type="module" src="/js/pages/countdown/countdown.js"></script>
+  </body>
+</html>

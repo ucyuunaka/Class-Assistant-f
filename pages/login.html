@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登录与注册</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/css/pages/login.css" />
+  </head>
+  <body>
+    <div class="back"></div>
+
+    <div id="window">
+      <!-- 卡片正面 - 登录和注册表单 -->
+      <div class="window-page page-front">
+        <div class="page-content">
+          <!-- 登录表单 -->
+          <div class="form-base login-form" id="login-form">
+            <header>
+              <h1>登录</h1>
+              <p>请输入您的账号信息</p>
+              <div class="switch-form">
+                <a href="#" id="to-signup">没有账号？去注册</a>
+              </div>
+            </header>
+            <form>
+              <div class="input-section email-section">
+                <input
+                  type="text"
+                  placeholder="请输入您的NetID"
+                  autocomplete="off"
+                  class="email login-email form-input"
+                />
+                <div class="animated-button">
+                  <span class="icon-paper-plane">
+                    <i class="fa fa-id-card-o"></i>
+                  </span>
+                  <span class="next-button email">
+                    <i class="fa fa-arrow-up"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="input-section password-section folded">
+                <input
+                  type="password"
+                  placeholder="请输入您的密码"
+                  class="password login-password form-input"
+                />
+                <div class="animated-button">
+                  <span class="icon-lock">
+                    <i class="fa fa-lock"></i>
+                  </span>
+                  <span class="next-button password">
+                    <i class="fa fa-paper-plane"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="success login-success">
+                <p>登录成功</p>
+              </div>
+            </form>
+          </div>
+
+          <!-- 注册表单 -->
+          <div class="form-base signup-form hidden" id="signup-form">
+            <header>
+              <h1>注册</h1>
+              <p>请按照指引填写</p>
+              <div class="switch-form">
+                <a href="#" id="to-login">已有账号？去登录</a>
+              </div>
+            </header>
+            <form>
+              <div class="input-section email-section">
+                <input
+                  type="text"
+                  placeholder="请输入您的NetID"
+                  autocomplete="off"
+                  class="email signup-email form-input"
+                />
+                <div class="animated-button">
+                  <span class="icon-paper-plane">
+                    <i class="fa fa-id-card-o"></i>
+                  </span>
+                  <span class="next-button signup-email">
+                    <i class="fa fa-arrow-up"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="input-section password-section folded">
+                <input
+                  type="password"
+                  placeholder="请输入您的密码"
+                  class="password signup-password form-input"
+                />
+                <div class="animated-button">
+                  <span class="icon-lock">
+                    <i class="fa fa-lock"></i>
+                  </span>
+                  <span class="next-button signup-password">
+                    <i class="fa fa-arrow-up"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="input-section repeat-password-section folded">
+                <input
+                  type="password"
+                  placeholder="请再次输入您的密码"
+                  class="repeat-password form-input"
+                />
+                <div class="animated-button">
+                  <span class="icon-repeat-lock">
+                    <i class="fa fa-lock"></i>
+                  </span>
+                  <span class="next-button repeat-password">
+                    <i class="fa fa-paper-plane"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="success signup-success">
+                <p>注册成功！将自动登录...</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片背面 - 欢迎页面 -->
+      <div class="window-page page-back">
+        <div class="page-content">
+          <!-- 头像图片将通过JS动态设置 -->
+          <img class="avatar welcome-element" src="" />
+          <p class="welcome welcome-element">欢迎回来!</p>
+          <p class="user-name welcome-element">尊敬的用户</p>
+          <div class="perspective">
+            <button class="button inline trigger-anim-replay">
+              <i class="ion-log-in"></i> 开始使用课堂助手
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/js/pages/login.js"></script>
+  </body>
+</html>

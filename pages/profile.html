@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>个人资料 - 课堂助手</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/themes/themes.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/pages/profile.css" />
+  </head>
+  <body>
+    <!-- 侧边栏导航 -->
+    <div id="sidebar-container"></div>
+
+    <!-- 移动端菜单切换按钮 -->
+
+    <!-- 移动端遮罩层 -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- 主内容区 -->
+    <div class="container py-4 sidebar-active">
+      <!-- 顶栏容器 -->
+      <div id="header-container"></div>
+
+      <div class="profile-container">
+        <!-- 左侧信息栏 -->
+        <div class="profile-sidebar">
+          <div class="profile-card animate-on-scroll fade-up">
+            <div class="avatar-container">
+              <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="用户头像"
+                class="avatar"
+                id="user-avatar"
+              />
+              <label for="avatar-input" class="avatar-upload" title="上传头像">
+                <i class="fas fa-camera"></i>
+                <span class="upload-text">更改头像</span>
+              </label>
+              <input
+                type="file"
+                id="avatar-input"
+                class="file-input"
+                accept="image/*"
+              />
+            </div>
+            <div class="avatar-tip">点击相机图标更换头像</div>
+
+            <div class="user-info">
+              <h2 class="user-name">张三</h2>
+              <p class="user-role">学生</p>
+            </div>
+
+            <div class="stats-container">
+              <div class="stat-item animate-on-scroll fade-up delay-100">
+                <div class="stat-value">12</div>
+                <div class="stat-label">已完成课程</div>
+              </div>
+              <div class="stat-item animate-on-scroll fade-up delay-200">
+                <div class="stat-value">5</div>
+                <div class="stat-label">待考试程</div>
+              </div>
+              <div class="stat-item animate-on-scroll fade-up delay-100">
+                <div class="stat-value">89%</div>
+                <div class="stat-label">平均出勤率</div>
+              </div>
+              <div class="stat-item animate-on-scroll fade-up delay-200">
+                <div class="stat-value">18</div>
+                <div class="stat-label">学习天数</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧内容区 -->
+        <div class="profile-content">
+          <!-- 基本信息 -->
+          <div class="profile-card animate-on-scroll fade-up">
+            <div class="card-header">
+              <h3 class="card-title">基本信息</h3>
+            </div>
+
+            <form id="basic-info-form">
+              <div class="form-group">
+                <label class="form-label" for="full-name">姓名</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="full-name"
+                  value="张三"
+                  disabled
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="student-id">学号</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="student-id"
+                  value="22778899"
+                  disabled
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="email">邮箱</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  value="zhangsan@mail2.sysu.edu.cn"
+                  disabled
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="phone">手机号</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="phone"
+                  value="138****1234"
+                  disabled
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="major">专业</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="major"
+                  value="智能工程与技术"
+                  disabled
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="class">班级</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="class"
+                  value="2022级5班"
+                  disabled
+                />
+              </div>
+            </form>
+          </div>
+
+          <!-- 教育经历 -->
+          <div class="profile-card animate-on-scroll fade-up delay-100">
+            <div class="card-header">
+              <h3 class="card-title">教育经历</h3>
+            </div>
+
+            <form id="education-form">
+              <div class="form-group">
+                <label class="form-label" for="school">学校</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="school"
+                  value="羽丘高等学园"
+                  disabled
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="degree">学位</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="degree"
+                  value="高中"
+                  disabled
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="enrollment-year">入学年份</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="enrollment-year"
+                  value="2019"
+                  disabled
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="graduation-year">毕业年份</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="graduation-year"
+                  value="2022"
+                  disabled
+                />
+              </div>
+            </form>
+          </div>
+
+          <!-- 账号安全 -->
+          <div class="profile-card animate-on-scroll fade-up delay-200">
+            <div class="card-header">
+              <h3 class="card-title">账号安全</h3>
+            </div>
+
+            <div>
+              <div class="account-security-item">
+                <div class="account-security-label">
+                  <div class="label-title">修改密码</div>
+                  <div class="label-description">
+                    定期更改密码以保障账号安全
+                  </div>
+                </div>
+                <button class="btn btn-outline" id="change-password-btn">
+                  修改
+                </button>
+              </div>
+
+              <div class="account-security-item">
+                <div class="account-security-label">
+                  <div class="label-title">绑定手机</div>
+                  <div class="label-description">已绑定手机: 138****1234</div>
+                </div>
+                <button class="btn btn-outline" id="change-phone-btn">
+                  更换
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 修改密码模态框 -->
+    <div id="password-modal" class="modal">
+      <div class="modal-content animate-on-scroll zoom-in">
+        <span class="close-btn" id="close-password-modal">&times;</span>
+        <h2>修改密码</h2>
+        <form id="password-form">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            autocomplete="username"
+            value="current-user"
+            class="hidden"
+          />
+          <div class="form-group">
+            <label for="current-password" class="form-label">当前密码</label>
+            <input
+              type="password"
+              id="current-password"
+              class="form-control"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="new-password" class="form-label">新密码</label>
+            <input
+              type="password"
+              id="new-password"
+              class="form-control"
+              autocomplete="new-password"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="confirm-password" class="form-label">确认新密码</label>
+            <input
+              type="password"
+              id="confirm-password"
+              class="form-control"
+              autocomplete="new-password"
+              required
+            />
+          </div>
+          <div class="form-group modal-buttons">
+            <button type="submit" class="btn">确认修改</button>
+            <button type="button" class="btn btn-outline" id="cancel-password">
+              取消
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer"></footer>
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/components/sidebar/sidebar.js"></script>
+    <script type="module" src="/components/header/header.js"></script>
+    <script
+      type="module"
+      src="/components/notifications/notifications.js"
+    ></script>
+    <script type="module" src="/components/buttons/buttons.js"></script>
+    <script type="module" src="/components/footer/footer.js"></script>
+    <script
+      type="module"
+      src="/components/scrollAnimation/scrollAnimation.js"
+    ></script>
+    <script type="module" src="/js/themes.js"></script>
+    <script type="module" src="/js/pages/profile.js"></script>
+  </body>
+</html>

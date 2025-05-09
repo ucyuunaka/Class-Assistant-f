@@ -1,0 +1,537 @@
+/**
+ * 课堂助手 - 扩展主题系统
+ * 基于测试色彩搭配文件中的组合渐变效果扩展主题选项
+ */
+
+/* 主题渐变变量 */
+:root {
+  /* 背景色 */
+  --background-color: #f7f2fa;
+  --background-secondary: #ffffff;
+  
+  /* 文本颜色 */
+  --text-color: #333333;
+  --text-secondary: #666666;
+  
+  /* 边框颜色 */
+  --border-color: #dddddd;
+  
+  /* 阴影 */
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  /* 边框圆角 */
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+  
+  /* 状态颜色 */
+  --primary-color: #4a6fa5;
+  --primary-light: rgba(74, 111, 165, 0.15);
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  
+  /* UI元素颜色 */
+  --button-primary: var(--primary-color);
+  --button-text: white;
+  --button-outline-color: var(--text-color);
+  --tooltip-background: #2d3748;
+  --tooltip-text: white;
+  --card-header-bg: rgba(45, 55, 72, 0.1);
+  --text-backdrop-bg: rgba(45, 55, 72, 0.1);
+  --nav-active-bg: rgba(45, 55, 72, 0.2);
+  --tag-bg: rgba(45, 55, 72, 0.1);
+  --tag-border: rgba(45, 55, 72, 0.2);
+  
+  /* 全局整体和主题关系不大的变量 */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1);
+  
+  /* 颜色变量 */
+  --primary-rgb: 64, 105, 224; /* 新增RGB变量 */
+  --primary-dark: #3657c5;
+  --primary-light: #e6f0ff;
+  --secondary-color: #5c6ac4;
+  --background-input: #ffffff;
+  --info-color: #17a2b8;
+  --tag-bg: #f0f2f5;
+  --tag-border: #e0e4e8;
+}
+
+/* 渐变主题定义 */
+
+/* 1. 经典蓝粉渐变 (原始) */
+[data-theme="classic-blue-pink"] {
+  --gradient-primary: linear-gradient(to right, #91defe, #f9bccc);
+  --gradient-primary-hover: linear-gradient(to right, #7ed0f8, #f7a8bd);
+  --gradient-start: #91defe;
+  --gradient-end: #f9bccc;
+  --gradient-start-rgb: 145, 222, 254;
+  --gradient-end-rgb: 249, 188, 204;
+  
+  --background-color: #f7f2fa;
+  --background-secondary: #ffffff;
+  
+  --text-color: #5a3d7a;
+  --text-secondary: #8e6bab;
+  
+  --border-color: #dddddd;
+  
+  /* UI元素颜色 */
+  --primary-color: #4a6fa5;
+  --primary-light: rgba(74, 111, 165, 0.15);
+  --button-primary: #4a6fa5;
+  --button-text: white;
+  --button-outline-color: #2d3748;
+  --tooltip-background: #2d3748;
+  --tooltip-text: white;
+  --card-header-bg: rgba(45, 55, 72, 0.1);
+  --text-backdrop-bg: rgba(45, 55, 72, 0.1);
+  --nav-active-bg: rgba(45, 55, 72, 0.2);
+  --tag-bg: rgba(45, 55, 72, 0.1);
+  --tag-border: rgba(45, 55, 72, 0.2);
+}
+
+/* 2. 薄荷紫渐变 */
+[data-theme="mint-purple"] {
+  --gradient-primary: linear-gradient(to right, #a0e8e0, #d4bbfc);
+  --gradient-primary-hover: linear-gradient(to right, #8fdfd6, #c9a9fa);
+  --gradient-start: #a0e8e0;
+  --gradient-end: #d4bbfc;
+  --gradient-start-rgb: 160, 232, 224;
+  --gradient-end-rgb: 212, 187, 252;
+  
+  --background-color: #f5fbfa;
+  --background-secondary: #ffffff;
+  
+  --text-color: #4a5568;
+  --text-secondary: #718096;
+  
+  --border-color: #e2f0ee;
+  
+  /* UI元素颜色 */
+  --primary-color: #6b46c1;
+  --primary-light: rgba(107, 70, 193, 0.15);
+  --button-primary: #6b46c1;
+  --button-text: white;
+  --button-outline-color: #4a5568;
+  --tooltip-background: #2a4365;
+  --tooltip-text: white;
+  --card-header-bg: rgba(107, 70, 193, 0.1);
+  --text-backdrop-bg: rgba(74, 85, 104, 0.08);
+  --nav-active-bg: rgba(107, 70, 193, 0.15);
+  --tag-bg: rgba(74, 85, 104, 0.08);
+  --tag-border: rgba(74, 85, 104, 0.15);
+}
+
+/* 3. 蜜桃珊瑚渐变 */
+[data-theme="peach-coral"] {
+  --gradient-primary: linear-gradient(to right, #ffd7e8, #ffb7c5);
+  --gradient-primary-hover: linear-gradient(to right, #ffc7df, #ff9fb3);
+  --gradient-start: #ffd7e8;
+  --gradient-end: #ffb7c5;
+  --gradient-start-rgb: 255, 215, 232;
+  --gradient-end-rgb: 255, 183, 197;
+  
+  --background-color: #fff8f8;
+  --background-secondary: #fffafb;
+  
+  --text-color: #754b4b;
+  --text-secondary: #a87e7e;
+  
+  --border-color: #ffdeeb;
+  
+  /* UI元素颜色 */
+  --primary-color: #c53030;
+  --primary-light: rgba(197, 48, 48, 0.15);
+  --button-primary: #c53030;
+  --button-text: white;
+  --button-outline-color: #754b4b;
+  --tooltip-background: #742a2a;
+  --tooltip-text: white;
+  --card-header-bg: rgba(197, 48, 48, 0.1);
+  --text-backdrop-bg: rgba(117, 75, 75, 0.08);
+  --nav-active-bg: rgba(197, 48, 48, 0.15);
+  --tag-bg: rgba(117, 75, 75, 0.08);
+  --tag-border: rgba(117, 75, 75, 0.15);
+}
+
+/* 4. 绿蓝渐变 */
+[data-theme="green-blue"] {
+  --gradient-primary: linear-gradient(to right, #d2e8c8, #b5d8ff);
+  --gradient-primary-hover: linear-gradient(to right, #c5e2b7, #a1cdff);
+  --gradient-start: #d2e8c8;
+  --gradient-end: #b5d8ff;
+  --gradient-start-rgb: 210, 232, 200;
+  --gradient-end-rgb: 181, 216, 255;
+  
+  --background-color: #f7faff;
+  --background-secondary: #ffffff;
+  
+  --text-color: #2c5282;
+  --text-secondary: #4a69a5;
+  
+  --border-color: #d8e4ff;
+  
+  /* UI元素颜色 */
+  --primary-color: #3182ce;
+  --primary-light: rgba(49, 130, 206, 0.15);
+  --button-primary: #3182ce;
+  --button-text: white;
+  --button-outline-color: #2c5282;
+  --tooltip-background: #1e40af;
+  --tooltip-text: white;
+  --card-header-bg: rgba(49, 130, 206, 0.1);
+  --text-backdrop-bg: rgba(44, 82, 130, 0.08);
+  --nav-active-bg: rgba(49, 130, 206, 0.15);
+  --tag-bg: rgba(44, 82, 130, 0.08);
+  --tag-border: rgba(44, 82, 130, 0.15);
+}
+
+/* 5. 薰衣草奶油渐变 */
+[data-theme="lavender-cream"] {
+  --gradient-primary: linear-gradient(to right, #e6c6ff, #fff2d7);
+  --gradient-primary-hover: linear-gradient(to right, #deb6fa, #ffe9c0);
+  --gradient-start: #e6c6ff;
+  --gradient-end: #fff2d7;
+  --gradient-start-rgb: 230, 198, 255;
+  --gradient-end-rgb: 255, 242, 215;
+  
+  --background-color: #faf5ff;
+  --background-secondary: #ffffff;
+  
+  --text-color: #5a4a2d;
+  --text-secondary: #7d6c47;
+  
+  --border-color: #e8d7fc;
+  
+  /* UI元素颜色 */
+  --primary-color: #805ad5;
+  --primary-light: rgba(128, 90, 213, 0.15);
+  --button-primary: #805ad5;
+  --button-text: white;
+  --button-outline-color: #5a4a2d;
+  --tooltip-background: #5a4a2d;
+  --tooltip-text: white;
+  --card-header-bg: rgba(128, 90, 213, 0.1);
+  --text-backdrop-bg: rgba(90, 74, 45, 0.08);
+  --nav-active-bg: rgba(128, 90, 213, 0.15);
+  --tag-bg: rgba(90, 74, 45, 0.08);
+  --tag-border: rgba(90, 74, 45, 0.15);
+}
+
+/* 6. 蓝紫渐变 */
+[data-theme="blue-violet"] {
+  --gradient-primary: linear-gradient(to right, #b5d8ff, #d4bbfc);
+  --gradient-primary-hover: linear-gradient(to right, #9ccaff, #c8a8fa);
+  --gradient-start: #b5d8ff;
+  --gradient-end: #d4bbfc;
+  --gradient-start-rgb: 181, 216, 255;
+  --gradient-end-rgb: 212, 187, 252;
+  
+  --background-color: #f5f7ff;
+  --background-secondary: #ffffff;
+  
+  --text-color: #4c3d82;
+  --text-secondary: #6b5caa;
+  
+  --border-color: #d2d5fc;
+  
+  /* UI元素颜色 */
+  --primary-color: #6d28d9;
+  --primary-light: rgba(109, 40, 217, 0.15);
+  --button-primary: #6d28d9;
+  --button-text: white;
+  --button-outline-color: #4c3d82;
+  --tooltip-background: #1e293b;
+  --tooltip-text: white;
+  --card-header-bg: rgba(109, 40, 217, 0.1);
+  --text-backdrop-bg: rgba(76, 61, 130, 0.08);
+  --nav-active-bg: rgba(109, 40, 217, 0.15);
+  --tag-bg: rgba(76, 61, 130, 0.08);
+  --tag-border: rgba(76, 61, 130, 0.15);
+}
+
+/* 7. 珊瑚薄荷渐变 */
+[data-theme="coral-mint"] {
+  --gradient-primary: linear-gradient(to right, #ffb7c5, #a0e8e0);
+  --gradient-primary-hover: linear-gradient(to right, #ffa3b6, #8fdfd6);
+  --gradient-start: #ffb7c5;
+  --gradient-end: #a0e8e0;
+  --gradient-start-rgb: 255, 183, 197;
+  --gradient-end-rgb: 160, 232, 224;
+  
+  --background-color: #f8fffc;
+  --background-secondary: #ffffff;
+  
+  --text-color: #3c5d58;
+  --text-secondary: #5c837e;
+  
+  --border-color: #d9f5f1;
+  
+  /* UI元素颜色 */
+  --primary-color: #0d9488;
+  --primary-light: rgba(13, 148, 136, 0.15);
+  --button-primary: #0d9488;
+  --button-text: white;
+  --button-outline-color: #3c5d58;
+  --tooltip-background: #134e4a;
+  --tooltip-text: white;
+  --card-header-bg: rgba(13, 148, 136, 0.1);
+  --text-backdrop-bg: rgba(60, 93, 88, 0.08);
+  --nav-active-bg: rgba(13, 148, 136, 0.15);
+  --tag-bg: rgba(60, 93, 88, 0.08);
+  --tag-border: rgba(60, 93, 88, 0.15);
+}
+
+/* 8. 夕阳渐变 */
+[data-theme="sunset"] {
+  --gradient-primary: linear-gradient(to right, #f9bccc, #fff2d7);
+  --gradient-primary-hover: linear-gradient(to right, #f7a8bd, #ffe9c0);
+  --gradient-start: #f9bccc;
+  --gradient-end: #fff2d7;
+  --gradient-start-rgb: 249, 188, 204;
+  --gradient-end-rgb: 255, 242, 215;
+  
+  --background-color: #fffaf2;
+  --background-secondary: #ffffff;
+  
+  --text-color: #7a5a3d;
+  --text-secondary: #ab8e6b;
+  
+  --border-color: #fbe2d8;
+  
+  /* UI元素颜色 */
+  --primary-color: #c27803;
+  --primary-light: rgba(194, 120, 3, 0.15);
+  --button-primary: #c27803;
+  --button-text: white;
+  --button-outline-color: #7a5a3d;
+  --tooltip-background: #7a5a3d;
+  --tooltip-text: white;
+  --card-header-bg: rgba(194, 120, 3, 0.1);
+  --text-backdrop-bg: rgba(122, 90, 61, 0.08);
+  --nav-active-bg: rgba(194, 120, 3, 0.15);
+  --tag-bg: rgba(122, 90, 61, 0.08);
+  --tag-border: rgba(122, 90, 61, 0.15);
+}
+
+/* 深色模式适配 */
+[data-theme="dark"] {
+  --gradient-primary: linear-gradient(to right, #4a7b9b, #7a4a6b);
+  --gradient-primary-hover: linear-gradient(to right, #3c6a87, #6a3957);
+  --gradient-start: #4a7b9b;
+  --gradient-end: #7a4a6b;
+  --gradient-start-rgb: 74, 123, 155;
+  --gradient-end-rgb: 122, 74, 107;
+  
+  --background-color: #1a1a2e;
+  --background-secondary: #16213e;
+  
+  --text-color: #e6e6fa;
+  --text-secondary: #b0b0cc;
+  
+  --border-color: #2a2a4a;
+  
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  
+  /* UI元素颜色 */
+  --primary-color: #3b82f6;
+  --primary-light: rgba(59, 130, 246, 0.15);
+  --button-primary: #3b82f6;
+  --button-text: #e6e6fa;
+  --button-outline-color: #e6e6fa;
+  --tooltip-background: #0f172a;
+  --tooltip-text: white;
+  --card-header-bg: rgba(255, 255, 255, 0.05);
+  --text-backdrop-bg: rgba(0, 0, 0, 0.3);
+  --nav-active-bg: rgba(255, 255, 255, 0.1);
+  --tag-bg: rgba(255, 255, 255, 0.08);
+  --tag-border: rgba(255, 255, 255, 0.15);
+}
+
+/* 主题预览样式 */
+.theme-preview-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.theme-preview {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.theme-preview:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.theme-preview.active {
+  border: 2px solid var(--gradient-start);
+}
+
+.theme-preview-top {
+  height: 50px;
+  background-image: var(--gradient-primary);
+}
+
+.theme-preview-bottom {
+  height: 30px;
+  background-color: var(--background-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-preview-name {
+  font-size: 0.75rem;
+  color: var(--text-color);
+}
+
+/* 统一的UI元素样式 */
+
+/* 按钮样式 */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.2s ease;
+  background-color: var(--button-primary);
+  color: var(--button-text);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid currentColor;
+  color: var(--button-outline-color);
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.btn-warning {
+  background-color: var(--warning-color);
+  color: white;
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+/* 卡片样式 */
+.card {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background-color: var(--background-color);
+  box-shadow: var(--shadow);
+}
+
+.card-header {
+  padding: 1rem;
+  font-weight: 600;
+  background-color: var(--card-header-bg);
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+/* 表单元素 */
+.form-input, .form-control {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--border-radius-sm);
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus, .form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+/* 工具提示 */
+.tooltip {
+  background-color: var(--tooltip-background);
+  color: var(--tooltip-text);
+}
+
+/* 导航菜单 */
+.nav-active {
+  background-color: var(--nav-active-bg);
+}
+
+/* 标签 */
+.tag {
+  background-color: var(--tag-bg);
+  border: 1px solid var(--tag-border);
+  color: var(--text-color);
+}
+
+/* 文字背景 */
+.text-backdrop {
+  background-color: var(--text-backdrop-bg);
+}
+
+/* 通知样式 */
+.notification {
+  background-color: var(--background-secondary);
+  color: var(--text-color);
+  border-left: 4px solid var(--primary-color);
+}
+
+.notification.success {
+  border-color: var(--success-color);
+}
+
+.notification.warning {
+  border-color: var(--warning-color);
+}
+
+.notification.error {
+  border-color: var(--danger-color);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .theme-preview-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .theme-preview-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

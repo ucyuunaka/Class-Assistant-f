@@ -1,0 +1,315 @@
+/* ==========================================================================
+   通知组件 (Notification Component)
+   提供页面中各类通知的样式和动画效果
+   ========================================================================== */
+
+/* ==========================================================================
+   组件: 通知容器 (Component: Notification Container)
+   ========================================================================== */
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  /* 确保通知显示在其他页面元素之上 */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  max-width: 350px;
+}
+
+/* ==========================================================================
+   组件: 通知 (Component: Notification)
+   ========================================================================== */
+.notification {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: 12px; /* 更圆润的边角 */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 更精致的阴影 */
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  transform: translateX(30px);
+  animation: slideIn 0.3s cubic-bezier(0.2, 0.1, 0.25, 1) forwards;
+  border-left: 4px solid var(--primary-color);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.notification:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12); /* 悬停时增强阴影 */
+  transform: translateY(-2px);
+}
+
+/* 通知内容区域 */
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem; /* 增加间距 */
+  font-size: 0.95rem;
+  font-weight: 450; /* 苹果风格字重 */
+  letter-spacing: -0.01em; /* 轻微的字母间距调整，符合苹果设计 */
+  line-height: 1.4;
+  flex: 1;
+}
+
+/* 通知图标样式 */
+.notification-content i {
+  font-size: 1.3rem; /* 略微增大图标 */
+  flex-shrink: 0;
+}
+
+/* 关闭按钮 */
+.notification-close {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 6px;
+  margin-left: 0.5rem;
+  opacity: 0.7;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  flex-shrink: 0;
+}
+
+.notification-close:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.05); /* 悬停时轻微的背景色 */
+}
+
+/* ==========================================================================
+   状态: 通知类型 (State: Notification Types)
+   ========================================================================== */
+/* 成功类型通知 */
+.notification-success {
+  border-left-color: var(--success-color);
+  background-color: rgba(var(--success-color-rgb), 0.03);
+}
+
+.notification-success i {
+  color: var(--success-color);
+}
+
+/* 错误类型通知 */
+.notification-error {
+  border-left-color: var(--danger-color);
+  background-color: rgba(var(--danger-color-rgb), 0.03);
+}
+
+.notification-error i {
+  color: var(--danger-color);
+}
+
+/* 警告类型通知 - 更加突出 */
+.notification-warning {
+  border-left-color: var(--warning-color);
+  background-color: rgba(var(--warning-color-rgb), 0.05);
+}
+
+.notification-warning i {
+  color: var(--warning-color);
+  animation: pulseWarning 2s infinite;
+}
+
+@keyframes pulseWarning {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 信息类型通知 */
+.notification-info {
+  border-left-color: var(--primary-color);
+  background-color: rgba(var(--primary-color-rgb), 0.03);
+}
+
+.notification-info i {
+  color: var(--primary-color);
+}
+
+/* ==========================================================================
+   组件: 通知操作 (Component: Notification Actions)
+   ========================================================================== */
+.notification-actions {
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+/* 通知操作按钮 */
+.notification-action {
+  background: none;
+  border: 1px solid currentColor;
+  color: var(--primary-color);
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  margin-left: 8px;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.notification-action:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  transform: translateY(-1px);
+  opacity: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.notification-action:active {
+  transform: translateY(0);
+}
+
+/* 不同通知类型的按钮颜色 */
+.notification-info .notification-action {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.notification-success .notification-action {
+  color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.notification-warning .notification-action {
+  color: var(--warning-color);
+  border-color: var(--warning-color);
+}
+
+.notification-error .notification-action {
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+/* ==========================================================================
+   动画效果 (Animations)
+   ========================================================================== */
+/* 滑入动画 */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in {
+  animation: slideIn 0.3s forwards;
+}
+
+/* 淡出动画 */
+.fade-out {
+  animation: fadeOut 0.3s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+/* ==========================================================================
+   深色模式调整 (Dark Mode Adjustments)
+   ========================================================================== */
+[data-theme="dark"] .notification {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  background-color: var(--background-color);
+}
+
+[data-theme="dark"] .notification-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .notification-success {
+  background-color: rgba(var(--success-color-rgb), 0.08);
+}
+
+[data-theme="dark"] .notification-error {
+  background-color: rgba(var(--danger-color-rgb), 0.08);
+}
+
+[data-theme="dark"] .notification-warning {
+  background-color: rgba(var(--warning-color-rgb), 0.08);
+}
+
+[data-theme="dark"] .notification-info {
+  background-color: rgba(var(--primary-color-rgb), 0.08);
+}
+
+[data-theme="dark"] .notification-action {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .notification-action:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   响应式设计 (Responsive Design)
+   ========================================================================== */
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .notification-container {
+    max-width: calc(100vw - 30px);
+    right: 10px;
+    top: 10px;
+    gap: 8px;
+  }
+  
+  .notification {
+    padding: 0.75rem 0.9rem;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+  }
+  
+  .notification-content {
+    font-size: 0.9rem;
+    gap: 0.75rem;
+  }
+  
+  .notification-content i {
+    font-size: 1.2rem;
+  }
+  
+  .notification-action {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    margin-left: 6px;
+  }
+  
+  .notification-close {
+    width: 24px;
+    height: 24px;
+    font-size: 1.1rem;
+  }
+}

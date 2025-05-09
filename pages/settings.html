@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>设置 - 课堂助手</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/themes/themes.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/pages/settings.css" />
+  </head>
+  <body>
+    <!-- 侧边栏导航 -->
+    <div id="sidebar-container"></div>
+
+    <!-- 移动端遮罩层 -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- 主内容区 -->
+    <div class="container py-4 sidebar-active">
+      <!-- 顶栏容器 -->
+      <div id="header-container"></div>
+
+      <div class="settings-container">
+        <!-- 显示设置 -->
+        <div class="settings-card animate-on-scroll fade-up">
+          <div class="settings-section">
+            <div class="settings-header">
+              <i class="ri-palette-line"></i>
+              <h2 class="settings-title">显示设置</h2>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">主题颜色</div>
+                <div class="settings-description">选择您喜欢的配色主题</div>
+              </div>
+              <div class="settings-content">
+                <div class="theme-switcher" id="theme-switcher">
+                  <!-- 主题球之间的垂直间距增加，确保工具提示有足够的显示空间 -->
+                  <div class="theme-ball-wrapper">
+                    <!-- 经典蓝粉渐变 -->
+                    <div
+                      class="theme-ball classic-blue-pink-ball active"
+                      data-theme="classic-blue-pink"
+                    >
+                      <div class="tooltip">
+                        ✨ 经典蓝粉 ✨<br />
+                        清新优雅的梦幻配色
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-ball-wrapper">
+                    <!-- 薄荷紫渐变 -->
+                    <div
+                      class="theme-ball mint-purple-ball"
+                      data-theme="mint-purple"
+                    >
+                      <div class="tooltip">
+                        🌿 薄荷紫 🌿<br />
+                        清凉醒神的薄荷紫
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-ball-wrapper">
+                    <!-- 蜜桃珊瑚渐变 -->
+                    <div
+                      class="theme-ball peach-coral-ball"
+                      data-theme="peach-coral"
+                    >
+                      <div class="tooltip">
+                        🍑 蜜桃珊瑚 🍑<br />
+                        甜美可爱的蜜桃色
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-ball-wrapper">
+                    <!-- 绿蓝渐变 -->
+                    <div
+                      class="theme-ball green-blue-ball"
+                      data-theme="green-blue"
+                    >
+                      <div class="tooltip">
+                        🌊 绿蓝渐变 🌊<br />
+                        清新自然的田园风
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-ball-wrapper">
+                    <!-- 薰衣草奶油渐变 -->
+                    <div
+                      class="theme-ball lavender-cream-ball"
+                      data-theme="lavender-cream"
+                    >
+                      <div class="tooltip">
+                        💜 薰衣草奶油 💜<br />
+                        浪漫梦幻的紫金配色
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-ball-wrapper">
+                    <!-- 蓝紫渐变 -->
+                    <div
+                      class="theme-ball blue-violet-ball"
+                      data-theme="blue-violet"
+                    >
+                      <div class="tooltip">
+                        🔮 蓝紫渐变 🔮<br />
+                        神秘梦幻的星空色
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-ball-wrapper">
+                    <!-- 珊瑚薄荷渐变 -->
+                    <div
+                      class="theme-ball coral-mint-ball"
+                      data-theme="coral-mint"
+                    >
+                      <div class="tooltip">
+                        🌸 珊瑚薄荷 🌸<br />
+                        活力四射的夏日风
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-ball-wrapper">
+                    <!-- 夕阳渐变 -->
+                    <div class="theme-ball sunset-ball" data-theme="sunset">
+                      <div class="tooltip">
+                        🌅 夕阳渐变 🌅<br />
+                        温暖静谧的黄昏色
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="theme-ball-wrapper">
+                    <!-- 深色模式 -->
+                    <div class="theme-ball dark-ball" data-theme="dark">
+                      <div class="tooltip">
+                        🌙 深色模式 🌙<br />
+                        护眼省电的暗黑风
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="current-theme" id="current-theme">
+                  <span class="theme-dot"></span>当前使用：
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">字体大小</div>
+                <div class="settings-description">调整界面文字大小</div>
+              </div>
+              <div class="font-size-controls">
+                <button class="btn btn-outline" id="decrease-font">A-</button>
+                <button class="btn" id="reset-font">重置</button>
+                <button class="btn btn-outline" id="increase-font">A+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 语言设置 -->
+        <div class="settings-card animate-on-scroll fade-up delay-100">
+          <div class="settings-section">
+            <div class="settings-header">
+              <i class="ri-translate-2"></i>
+              <h2 class="settings-title">语言设置</h2>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">界面语言</div>
+                <div class="settings-description">选择您偏好的语言</div>
+              </div>
+              <div class="language-selector">
+                <div class="language-option active" data-lang="zh">
+                  <img
+                    src="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/flags/4x3/cn.svg"
+                    alt="中文"
+                  />
+                  中文
+                </div>
+                <div class="language-option" data-lang="en">
+                  <img
+                    src="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/flags/4x3/us.svg"
+                    alt="English"
+                  />
+                  English
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 通知设置 -->
+        <div class="settings-card animate-on-scroll fade-up delay-200">
+          <div class="settings-section">
+            <div class="settings-header">
+              <i class="ri-notification-3-line"></i>
+              <h2 class="settings-title">通知设置</h2>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">课程提醒</div>
+                <div class="settings-description">课程开始前提醒</div>
+              </div>
+              <label class="theme-switch">
+                <input type="checkbox" id="course-notification" checked />
+                <span class="theme-slider"></span>
+              </label>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">考试提醒</div>
+                <div class="settings-description">考试日期提醒</div>
+              </div>
+              <label class="theme-switch">
+                <input type="checkbox" id="exam-notification" checked />
+                <span class="theme-slider"></span>
+              </label>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">提前提醒时间</div>
+                <div class="settings-description">选择提醒时间</div>
+              </div>
+              <div class="select-wrapper">
+                <i class="ri-time-line select-icon"></i>
+                <select class="form-control" id="reminder-time">
+                  <option value="15">15分钟前</option>
+                  <option value="30" selected>30分钟前</option>
+                  <option value="60">1小时前</option>
+                  <option value="120">2小时前</option>
+                  <option value="1440">1天前</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">通知显示数量</div>
+                <div class="settings-description">
+                  右上角最多同时显示的通知数
+                </div>
+              </div>
+              <div class="select-wrapper">
+                <i class="ri-stack-line select-icon"></i>
+                <select class="form-control" id="max-notifications">
+                  <option value="1">1条</option>
+                  <option value="3" selected>3条</option>
+                  <option value="5">5条</option>
+                  <option value="10">10条</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 数据管理 -->
+        <div class="settings-card animate-on-scroll fade-up delay-300">
+          <div class="settings-section">
+            <div class="settings-header">
+              <i class="ri-database-2-line"></i>
+              <h2 class="settings-title">数据管理</h2>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">备份数据</div>
+                <div class="settings-description">导出所有课表和考试数据</div>
+              </div>
+              <button class="btn btn-outline" id="backup-data">
+                <i class="ri-download-2-line"></i> 备份
+              </button>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">恢复数据</div>
+                <div class="settings-description">从备份文件导入数据</div>
+              </div>
+              <div>
+                <input
+                  type="file"
+                  id="restore-input"
+                  class="hidden"
+                  accept=".json"
+                />
+                <label for="restore-input" class="btn btn-outline">
+                  <i class="ri-upload-2-line"></i> 恢复
+                </label>
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">清除数据</div>
+                <div class="settings-description">清除应用中存储的全部数据</div>
+              </div>
+              <button class="btn btn-danger" id="clear-all-data">
+                <i class="ri-delete-bin-line"></i> 清除全部数据
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 账号安全 -->
+        <div class="settings-card animate-on-scroll fade-up delay-300">
+          <div class="settings-section">
+            <div class="settings-header">
+              <i class="ri-shield-user-line"></i>
+              <h2 class="settings-title">账号安全</h2>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">修改密码</div>
+                <div class="settings-description">
+                  定期更改密码以保障账号安全
+                </div>
+              </div>
+              <button class="btn btn-outline" id="change-password-btn">
+                修改
+              </button>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">退出登录</div>
+                <div class="settings-description">
+                  退出当前账号并返回登录界面
+                </div>
+              </div>
+              <button class="btn btn-danger" id="logout-btn">
+                <i class="ri-logout-box-r-line"></i> 退出登录
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 关于 -->
+        <div class="settings-card animate-on-scroll fade-up delay-400">
+          <div class="settings-section">
+            <div class="settings-header">
+              <i class="ri-information-line"></i>
+              <h2 class="settings-title">关于</h2>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">版本</div>
+                <div class="settings-description">课堂助手 1.0.0</div>
+              </div>
+              <button class="btn btn-outline" id="check-updates">
+                检查更新
+              </button>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-label">
+                <div class="settings-name">开发者</div>
+                <div class="settings-description">课堂助手开发团队</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 确认弹窗 -->
+    <div class="modal" id="confirm-modal">
+      <div class="modal-content">
+        <div class="modal-close" id="close-confirm-modal">×</div>
+        <h2 class="mb-3" id="confirm-title">确认操作</h2>
+        <p id="confirm-message">您确定要执行此操作吗？此操作无法撤销。</p>
+        <div class="modal-footer">
+          <button class="btn btn-outline" id="cancel-action">取消</button>
+          <button class="btn btn-danger" id="confirm-action">确认</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer"></footer>
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/components/sidebar/sidebar.js"></script>
+    <script type="module" src="/components/header/header.js"></script>
+    <script
+      type="module"
+      src="/components/notifications/notifications.js"
+    ></script>
+    <script type="module" src="/components/buttons/buttons.js"></script>
+    <script type="module" src="/components/footer/footer.js"></script>
+    <script
+      type="module"
+      src="/components/scrollAnimation/scrollAnimation.js"
+    ></script>
+    <script type="module" src="/components/modals/modals.js"></script>
+    <script type="module" src="/js/themes.js"></script>
+    <script type="module" src="/js/pages/settings.js"></script>
+  </body>
+</html>

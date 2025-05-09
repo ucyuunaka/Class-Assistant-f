@@ -1,0 +1,624 @@
+/* 基础样式 */
+
+/* 变量系统 */
+:root {
+    /* 基础变量 */
+    --global-radius: 3px;
+    --global-radius-large: 15px;
+    --global-radius-round: 1000px;
+
+    /* 动画时间 */
+    --transition-fast: 0.2s;
+    --transition-medium: 0.3s;
+    --transition-slow: 0.6s;
+    --transition-very-slow: 1s;
+    --window-anim-dur: 1.5s;
+    --form-switch-duration: 0.6s;
+
+    /* 布局变量 */
+    --window-padding: 60px;
+    --form-width: 400px;
+    --form-height: 450px;
+    --form-padding: 20px 40px;
+    --input-height: 75px;
+
+    /* 颜色系统 */
+    --color-white: #FFFFFF;
+    --color-white-transparent: rgba(255, 255, 255, 0.9);
+    --color-black: #333333;
+    --color-gray-light: #999999;
+    --color-gray-medium: #666666;
+
+    /* 主题色 - 登录 */
+    --color-login-primary: rgb(64, 146, 181);
+    --color-login-secondary: rgb(86, 152, 170);
+    --color-login-button: rgb(213, 240, 248);
+    --color-login-text: rgb(86, 152, 170);
+    --color-login-icon: rgb(64, 146, 181);
+    --color-login-input-bg: rgb(248, 248, 253);
+    --color-login-folded-bg: rgb(219, 240, 247);
+    --color-success-login: #33a3dc;
+
+    /* 主题色 - 注册 */
+    --color-signup-primary: rgb(125, 120, 180);
+    --color-signup-secondary: rgb(143, 143, 214);
+    --color-signup-button: rgb(212, 212, 255);
+    --color-signup-text: rgb(143, 143, 214);
+    --color-signup-icon: rgb(153, 153, 248);
+    --color-signup-input-bg: rgb(248, 248, 253);
+    --color-signup-folded-bg1: rgb(233, 226, 192);
+    --color-signup-folded-bg2: rgb(225, 188, 239);
+    --color-success-signup: limegreen;
+
+    /* 渐变背景 */
+    --login-bg-gradient: linear-gradient(120deg, rgb(52, 143, 150), rgb(86, 180, 211));
+    --signup-bg-gradient: linear-gradient(120deg, rgb(100, 57, 134), rgb(152, 174, 213));
+    --combined-bg-gradient: linear-gradient(120deg, rgb(52, 143, 150), rgb(125, 120, 180), rgb(152, 174, 213));
+
+    /* 阴影 */
+    --shadow-small: 0 4px 10px rgba(0, 0, 0, 0.15);
+    --shadow-medium: 0 5px 15px rgba(0, 0, 0, 0.2);
+    --shadow-large: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* 基础设置 */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif; /* 字体将通过 npm 包或全局 CSS 处理 */
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+/* 通用工具类 */
+.hidden {
+    display: none;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 背景 */
+.back {
+    background: var(--combined-bg-gradient);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    z-index: -1;
+    transition: background var(--transition-medium) ease-in-out;
+}
+
+body.signup-mode .back {
+    background: var(--combined-bg-gradient);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeIn {
+    animation: fadeIn 1s ease-in-out backwards;
+}
+
+/* 延迟设置 */
+.delay1 { animation-delay: .3s; }
+.delay2 { animation-delay: .6s; }
+.delay3 { animation-delay: .9s; }
+.delay4 { animation-delay: 1.2s; }
+
+/* 卡片窗口组件 */
+#window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    height: var(--form-height);
+    width: var(--form-width);
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out 0.1s;
+    transform-style: preserve-3d;
+    transition-property: all, opacity;
+    transition-duration: var(--transition-very-slow), 1.5s; /* 添加 opacity 的 duration */
+    perspective: 1000px;
+}
+
+/* 翻转状态 */
+#window.flip {
+    height: 460px;
+    width: 350px;
+}
+
+#window.flip .page-front {
+    transform: rotateX(180deg);
+}
+
+#window.flip .page-back {
+    transform: rotateX(360deg);
+}
+
+#window.flip .page-back .page-content {
+    opacity: 1;
+}
+
+/* 卡片页面通用样式 */
+.window-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    background: transparent;
+    border-radius: var(--global-radius-large);
+    transition: transform var(--transition-very-slow);
+}
+
+/* 页面正面 - 表单 */
+.page-front {
+    padding: 0;
+    z-index: 2;
+}
+
+.page-front .page-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 0;
+}
+
+/* 页面背面 - 欢迎页面 */
+.page-back {
+    text-align: center;
+    transform: rotateX(180deg);
+    padding: var(--window-padding);
+    background: var(--combined-bg-gradient);
+    border-radius: var(--global-radius-large);
+    box-shadow: var(--shadow-large);
+    z-index: 1;
+}
+
+.page-back .page-content {
+    opacity: 0;
+    transition: opacity var(--transition-medium) ease-in-out;
+}
+
+/* 欢迎页面元素 */
+.welcome-element {
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: all 0.4s ease-in-out;
+}
+
+.avatar {
+    height: 150px;
+    width: 150px;
+    border: 5px solid rgba(255, 255, 255, 0.8);
+    margin: 20px auto 30px auto;
+    display: block;
+    transform: scale(.1);
+    border-radius: var(--global-radius-round);
+    box-shadow: var(--shadow-medium);
+}
+
+.welcome {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: var(--color-white);
+    font-family: 'Open Sans', sans-serif; /* 字体将通过 npm 包或全局 CSS 处理 */
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+.user-name {
+    font-size: 16px;
+    color: var(--color-white-transparent);
+    margin-bottom: 40px;
+    font-family: 'Roboto', sans-serif; /* 字体将通过 npm 包或全局 CSS 处理 */
+    font-weight: 400;
+    transition-delay: 0.9s;
+}
+
+/* 翻转后欢迎页面元素显示 */
+#window.flip .page-back .avatar,
+#window.flip .page-back .welcome,
+#window.flip .page-back .perspective,
+#window.flip .page-back .user-name {
+    opacity: 1;
+    transform: none;
+    transition-duration: var(--transition-slow);
+}
+
+#window.flip .page-back .avatar { transition-delay: .3s; }
+#window.flip .page-back .welcome { transition-delay: .4s; }
+#window.flip .page-back .perspective { transition-delay: .5s; }
+#window.flip .page-back .user-name { transition-delay: .5s; }
+
+/* 装饰元素 */
+.page-back:before,
+.page-back:after {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: -1;
+}
+
+.page-back:before {
+    top: 40px;
+    left: 40px;
+}
+
+.page-back:after {
+    bottom: 40px;
+    right: 40px;
+}
+
+/* 按钮通用样式 */
+.perspective {
+    perspective: 1000px;
+}
+
+.button {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 30px;
+    margin: 20px auto 0;
+    text-align: center;
+    color: var(--color-login-text);
+    border: 0;
+    display: block;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+    font-size: 17px;
+    background: var(--color-login-button);
+    border-radius: 25px;
+    box-shadow: var(--shadow-small);
+    transition: all var(--transition-medium) ease;
+    transform-style: preserve-3d;
+    transform-origin: bottom;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.button:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.button i {
+    margin-right: 10px;
+    color: var(--color-login-icon);
+}
+
+.button.inline {
+    display: inline-block;
+    width: auto;
+    min-width: 160px;
+}
+
+/* 表单切换链接 */
+.switch-form {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 12px;
+}
+
+.switch-form a {
+    color: var(--color-gray-light);
+    text-decoration: none;
+    transition: color var(--transition-medium) ease;
+}
+
+.switch-form a:hover {
+    color: var(--color-gray-medium);
+    text-decoration: underline;
+}
+
+/* 表单基础样式 - 共享部分 */
+.form-base {
+    width: var(--form-width);
+    position: relative;
+    background: transparent;
+    height: 100%;
+    transition: all var(--transition-medium) ease-in-out;
+    transform-style: preserve-3d;
+    transition: transform var(--form-switch-duration), opacity var(--form-switch-duration);
+    backface-visibility: hidden;
+    transform: rotateY(0);
+}
+
+.form-base header {
+    position: relative;
+    z-index: 4;
+    background: white;
+    padding: var(--form-padding);
+    border-radius: var(--global-radius-large) var(--global-radius-large) 0 0;
+}
+
+.form-base header h1 {
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    color: var(--color-black);
+    font-size: 23px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.form-base header p {
+    word-spacing: 0px;
+    color: rgb(159, 172, 182);
+    font-size: 17px;
+    margin: 0;
+    margin-top: 5px;
+}
+
+.form-base form {
+    position: relative;
+    height: 300px;
+}
+
+/* 输入区域通用样式 */
+.input-section {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: var(--input-height);
+    border-radius: 0 0 var(--global-radius-large) var(--global-radius-large);
+    overflow: hidden;
+    z-index: 2;
+    box-shadow: var(--shadow-large);
+    transition: all var(--transition-fast) ease-in;
+}
+
+.input-section.folded {
+    width: 95%;
+    margin-top: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1;
+}
+
+.input-section.fold-up {
+    margin-top: -75px;
+}
+
+/* 表单输入通用样式 */
+.form-input {
+    width: 80%;
+    border: 0;
+    padding: var(--form-padding);
+    margin: 0;
+}
+
+form input:focus {
+    outline: none;
+}
+
+/* 动画按钮通用样式 */
+.animated-button {
+    width: 20%;
+}
+
+.animated-button span {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    line-height: 75px;
+    text-align: center;
+    height: 75px;
+    transition: all var(--transition-fast) ease-in;
+}
+
+.next {
+    margin-top: -75px;
+}
+
+/* 登录表单特定样式 */
+.login-form {
+    composes: form-base;
+}
+
+.login-form form input {
+    background: var(--color-login-input-bg);
+    color: var(--color-login-text);
+    composes: form-input;
+}
+
+.login-form form input::placeholder {
+    color: var(--color-login-text);
+    font-weight: 100;
+}
+
+.login-form .animated-button {
+    background-color: var(--color-login-button);
+}
+
+.login-form .animated-button span i {
+    color: var(--color-login-icon);
+}
+
+.login-form .next-button {
+    background: transparent;
+    color: var(--color-login-icon);
+    font-weight: 100;
+    width: 100%;
+    border: 0;
+    cursor: pointer;
+}
+
+.login-form .input-section.folded input {
+    background-color: var(--color-login-folded-bg);
+}
+
+.login-form .input-section.folded span {
+    background-color: var(--color-login-folded-bg);
+}
+
+.login-form .success {
+    background: var(--color-success-login);
+}
+
+/* 注册表单特定样式 */
+.signup-form {
+    composes: form-base;
+}
+
+.signup-form form input {
+    background: var(--color-signup-input-bg);
+    color: var(--color-signup-text);
+    composes: form-input;
+}
+
+.signup-form form input::placeholder {
+    color: var(--color-signup-text);
+    font-weight: 100;
+}
+
+.signup-form .animated-button {
+    background-color: var(--color-signup-button);
+}
+
+.signup-form .animated-button span i {
+    color: var(--color-signup-icon);
+}
+
+.signup-form .next-button {
+    background: transparent;
+    color: var(--color-signup-icon);
+    font-weight: 100;
+    width: 100%;
+    border: 0;
+    cursor: pointer;
+}
+
+.signup-form .success {
+    background: var(--color-success-signup);
+}
+
+.signup-form .input-section.folded input {
+    background-color: var(--color-signup-folded-bg1);
+}
+
+.signup-form .input-section.folded span {
+    background-color: var(--color-signup-folded-bg1);
+}
+
+.signup-form .input-section.folded + .folded {
+    width: 90%;
+    margin-top: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 0;
+}
+
+.signup-form .input-section.folded + .folded input {
+    background-color: var(--color-signup-folded-bg2);
+}
+
+.signup-form .input-section.folded + .folded span {
+    background-color: var(--color-signup-folded-bg2);
+}
+
+/* 成功提示共用样式 */
+.success {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: var(--input-height);
+    border-radius: 0 0 var(--global-radius-large) var(--global-radius-large);
+    overflow: hidden;
+    z-index: 2;
+    box-shadow: var(--shadow-large);
+    transition: all var(--transition-fast) ease-in;
+    margin-top: -75px;
+}
+
+.success p {
+    color: white;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+}
+
+/* 登录注册表单切换动画 */
+.form-flip-out {
+    transform: rotateY(-90deg);
+    opacity: 0;
+}
+
+.form-flip-in {
+    transform: rotateY(0);
+    opacity: 1;
+}
+
+/* 初始隐藏状态的注册表单 */
+.signup-form.hidden {
+    transform: rotateY(90deg);
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    :root {
+        --form-width: 320px;
+        --form-height: 420px;
+        --form-padding: 15px 20px;
+    }
+
+    .button {
+        padding: 0 15px;
+        font-size: 15px;
+    }
+
+    .welcome {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 360px) {
+    :root {
+        --form-width: 280px;
+        --form-padding: 10px 15px;
+    }
+
+    .login-form header h1, .signup-form header h1 {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,128 @@
+/* ==========================================================================
+   统一 Header 组件样式 (Unified Header Component Styles)
+   ========================================================================== */
+/*
+ * 这个文件包含了统一顶栏组件的所有样式。
+ * 布局：左侧为标题和可选副标题，右侧为可选按钮组。
+ */
+
+/* ==========================================================================
+   顶栏基础样式 (Base Header Styles)
+   ========================================================================== */
+.header-component {
+  width: 100%;
+  color: white;
+  /* 渐变背景效果: 从主色到渐变结束色 */
+  background: linear-gradient(135deg, var(--primary-color), var(--gradient-end));
+  border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+  overflow: hidden;
+  margin-bottom: 2rem; /* 确保与内容有一定间距 */
+}
+
+/* ==========================================================================
+   统一顶栏样式 (Unified Header Styles)
+   ========================================================================== */
+.unified-header {
+  padding: 2rem 0; /* 统一内边距 */
+}
+
+/* 使用 Flexbox 实现左右布局 */
+.unified-header .container {
+  display: flex;
+  justify-content: space-between; /* 内容和按钮分开 */
+  align-items: center; /* 垂直居中对齐 */
+  gap: 1.5rem; /* 内容和按钮之间的间距 */
+}
+
+/* 左侧内容容器 */
+.header-content {
+  flex-grow: 1; /* 占据可用空间 */
+}
+
+.header-title {
+  font-size: 2rem; /* 统一标题字号 */
+  font-weight: 700;
+  margin-bottom: 0.5rem; /* 调整标题和副标题间距 */
+}
+
+.header-subtitle {
+  font-size: 1.1rem; /* 统一副标题字号 (参考原 home-header-text) */
+  opacity: 0.9; /* 轻微透明度，增加层次感 */
+  margin: 0; /* 移除默认边距 */
+}
+
+/* 右侧按钮容器 */
+.header-buttons {
+  display: flex;
+  gap: 0.75rem; /* 按钮之间的间距 */
+  flex-shrink: 0; /* 防止按钮容器被压缩 */
+  flex-wrap: wrap; /* 允许按钮换行 */
+  justify-content: flex-end; /* 按钮靠右 */
+}
+
+/* 统一按钮样式 (基于原 home-outline-btn) */
+.header-btn {
+  /* 继承基础按钮样式，但提供特定背景和边框 */
+  background-color: rgba(255, 255, 255, 0.2) !important; /* 使用 !important 确保覆盖基础按钮样式 */
+  border: 1px solid white !important;
+  color: white !important;
+  padding: 0.5rem 1rem; /* 调整按钮大小 */
+  border-radius: var(--border-radius-sm);
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: inline-block; /* 确保按钮正确显示 */
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.9rem; /* 统一按钮字体大小 */
+}
+
+.header-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-1px); /* 轻微上移效果 */
+}
+
+.header-btn:active {
+  transform: translateY(0); /* 点击时恢复原位 */
+}
+
+
+/* ==========================================================================
+   响应式调整 (Responsive Adjustments)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .unified-header .container {
+    flex-direction: column; /* 在小屏幕上垂直堆叠 */
+    align-items: flex-start; /* 左对齐 */
+    gap: 1rem; /* 调整堆叠时的间距 */
+  }
+
+  .header-title {
+    font-size: 1.75rem; /* 小屏幕上减小标题字号 */
+  }
+
+  .header-subtitle {
+    font-size: 1rem; /* 小屏幕上减小副标题字号 */
+  }
+
+  .header-buttons {
+    justify-content: flex-start; /* 按钮组靠左 */
+    width: 100%; /* 占满宽度以便换行 */
+  }
+}
+
+/* TODO: 添加深色模式支持 */
+/*
+@media (prefers-color-scheme: dark) {
+  .header-component {
+    background: linear-gradient(135deg, var(--primary-dark), var(--gradient-end-dark));
+  }
+  .header-btn {
+     background-color: rgba(0, 0, 0, 0.2) !important;
+     border-color: var(--text-color-dark) !important;
+     color: var(--text-color-dark) !important;
+  }
+   .header-btn:hover {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+  }
+}
+*/

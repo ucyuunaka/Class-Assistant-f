@@ -1,0 +1,104 @@
+/* ==========================================================================
+   课堂助手 - 滚动动画组件样式
+   提供页面元素在滚动时的淡入浮现效果
+   ========================================================================== */
+   
+/* ==========================================================================
+   基础动画样式 (Base Animation Styles)
+   ========================================================================== */
+/*
+ * 默认的滚动动画效果
+ * 元素初始状态为不可见且缩小，向下偏移，过渡时间为0.6秒
+ */
+.animate-on-scroll {
+  opacity: 0;
+  transform: scale(0.8) translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+/* 激活状态 - 当元素进入视口时应用 */
+.animate-on-scroll.active {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   动画变体 (Animation Variants)
+   ========================================================================== */
+/* 从下向上淡入 */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+/* 从上向下淡入 */
+.fade-down {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: all 0.6s ease-out;
+}
+
+/* 从左向右淡入 */
+.fade-right {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.6s ease-out;
+}
+
+/* 从右向左淡入 */
+.fade-left {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.6s ease-out;
+}
+
+/* 缩放淡入 */
+.zoom-in {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.6s ease-out;
+}
+
+/* ==========================================================================
+   激活状态 (Active States)
+   ========================================================================== */
+/*
+ * 所有动画变体的激活状态共享相同的样式
+ * 元素完全不透明且恢复到原始变换
+ */
+.fade-up.active,
+.fade-down.active,
+.fade-right.active,
+.fade-left.active,
+.zoom-in.active {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   动画延迟 (Animation Delays)
+   ========================================================================== */
+/*
+ * 延迟类可以与任何动画变体组合使用
+ * 用于创建序列动画效果
+ */
+.delay-100 {
+  transition-delay: 0.1s;
+}
+
+.delay-200 {
+  transition-delay: 0.2s;
+}
+
+.delay-300 {
+  transition-delay: 0.3s;
+}
+
+.delay-400 {
+  transition-delay: 0.4s;
+}
+
+.delay-500 {
+  transition-delay: 0.5s;
+}

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>成绩管理 - 课堂助手</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/themes/themes.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="/lib/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="/css/pages/grades.css" />
+  </head>
+  <body>
+    <!-- 侧边栏导航 -->
+    <div id="sidebar-container"></div>
+
+    <!-- 移动端遮罩层 -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- 主要内容 -->
+    <div class="container py-4 sidebar-active">
+      <!-- 顶栏容器 -->
+      <div id="header-container"></div>
+
+      <!-- 成绩总览 -->
+      <section class="grades-section">
+        <h2 class="section-title animate-on-scroll fade-up">成绩概览</h2>
+        <div class="grades-summary">
+          <div class="summary-item animate-on-scroll fade-up">
+            <div class="summary-value" id="gpa-value">3.6</div>
+            <div class="summary-label">总GPA</div>
+          </div>
+          <div class="summary-item animate-on-scroll fade-up delay-100">
+            <div class="summary-value" id="avg-score">86.5</div>
+            <div class="summary-label">平均分</div>
+          </div>
+          <div class="summary-item animate-on-scroll fade-up delay-200">
+            <div class="summary-value" id="total-courses">12</div>
+            <div class="summary-label">课程数量</div>
+          </div>
+          <div class="summary-item animate-on-scroll fade-up delay-300">
+            <div class="summary-value" id="highest-score">98</div>
+            <div class="summary-label">最高分</div>
+          </div>
+          <div class="summary-item animate-on-scroll fade-up delay-400">
+            <div class="summary-value" id="lowest-score">58</div>
+            <div class="summary-label">最低分</div>
+          </div>
+          <div class="summary-item animate-on-scroll fade-up delay-500">
+            <div class="summary-value" id="total-credit">40</div>
+            <div class="summary-label">总学分</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 图表展示区 -->
+      <section class="grades-section">
+        <h2 class="section-title animate-on-scroll fade-up">成绩趋势</h2>
+        <div class="animate-on-scroll fade-up delay-100">
+          <div class="charts-grid">
+            <div class="charts-row">
+              <div class="chart-card">
+                <h3 class="chart-title">学期趋势</h3>
+                <div class="chart-container">
+                  <canvas id="trendChart"></canvas>
+                </div>
+              </div>
+              <div class="chart-card">
+                <h3 class="chart-title">科目分布</h3>
+                <div class="chart-container">
+                  <canvas id="subjectChart"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="chart-card full-width">
+              <h3 class="chart-title">成绩对比</h3>
+              <div class="chart-container">
+                <canvas id="compareChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GPA 仪表盘图表卡片 -->
+        <div class="chart-card full-width animate-on-scroll fade-up delay-200">
+          <h3 class="chart-title">GPA 概览</h3>
+          <div class="gpa-overview-layout">
+            <!-- 左右布局容器 -->
+            <div class="chart-container gpa-gauge-container">
+              <!-- 添加 gpa-gauge-container 类 -->
+              <canvas id="gpaGaugeChart"></canvas>
+            </div>
+            <div class="gpa-history-list" id="gpaHistoryListContainer">
+              <!-- 历史记录容器 -->
+              <!-- 历史 GPA 列表将由 JS 动态填充 -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 成绩录入 -->
+      <section class="grades-section">
+        <div class="action-buttons animate-on-scroll fade-up">
+          <button class="btn" id="exportGradesBtn">
+            <i class="fas fa-file-export"></i> 导出成绩单
+          </button>
+          <button class="btn btn-outline" id="filterGradesBtn">
+            <i class="fas fa-filter"></i> 筛选
+          </button>
+          <button class="btn" id="shareGradesBtn">
+            <i class="fas fa-share-alt"></i> 分享成绩
+          </button>
+        </div>
+
+        <!-- 成绩表格 -->
+        <div class="grades-card animate-on-scroll fade-up">
+          <div class="table-container">
+            <table class="grades-table">
+              <thead>
+                <tr>
+                  <th>课程名称</th>
+                  <th>类型</th>
+                  <th>学期</th>
+                  <th>分数</th>
+                  <th>学分</th>
+                  <th>日期</th>
+                  <th>申诉</th>
+                </tr>
+              </thead>
+              <tbody id="gradesTableBody">
+                <!-- 这里会通过JavaScript动态添加内容 -->
+                <tr>
+                  <td>高等数学</td>
+                  <td>期末考试</td>
+                  <td>2024-2025 第一学期</td>
+                  <td><span class="score-badge score-good">92</span></td>
+                  <td>5</td>
+                  <td>2025-01-15</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="高等数学"
+                      data-score="92"
+                      data-type="期末考试"
+                      data-semester="2024-2025 第一学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>程序设计</td>
+                  <td>期末项目</td>
+                  <td>2024-2025 第一学期</td>
+                  <td><span class="score-badge score-excellent">98</span></td>
+                  <td>4</td>
+                  <td>2025-01-10</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="程序设计"
+                      data-score="98"
+                      data-type="期末项目"
+                      data-semester="2024-2025 第一学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>大学物理</td>
+                  <td>期中考试</td>
+                  <td>2024-2025 第一学期</td>
+                  <td><span class="score-badge score-average">78</span></td>
+                  <td>4</td>
+                  <td>2024-11-05</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="大学物理"
+                      data-score="78"
+                      data-type="期中考试"
+                      data-semester="2024-2025 第一学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>大学英语</td>
+                  <td>期末考试</td>
+                  <td>2024-2025 第一学期</td>
+                  <td><span class="score-badge score-good">88</span></td>
+                  <td>3</td>
+                  <td>2025-01-18</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="大学英语"
+                      data-score="88"
+                      data-type="期末考试"
+                      data-semester="2024-2025 第一学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>数据库原理</td>
+                  <td>期末考试</td>
+                  <td>2023-2024 第二学期</td>
+                  <td><span class="score-badge score-excellent">95</span></td>
+                  <td>3</td>
+                  <td>2024-06-20</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="数据库原理"
+                      data-score="95"
+                      data-type="期末考试"
+                      data-semester="2023-2024 第二学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>操作系统</td>
+                  <td>课堂测验</td>
+                  <td>2023-2024 第二学期</td>
+                  <td><span class="score-badge score-average">73</span></td>
+                  <td>4</td>
+                  <td>2024-04-15</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="操作系统"
+                      data-score="73"
+                      data-type="课堂测验"
+                      data-semester="2023-2024 第二学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>计算机网络</td>
+                  <td>作业</td>
+                  <td>2024-2025 第一学期</td>
+                  <td><span class="score-badge score-average">76</span></td>
+                  <td>3</td>
+                  <td>2024-10-22</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="计算机网络"
+                      data-score="76"
+                      data-type="作业"
+                      data-semester="2024-2025 第一学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>线性代数</td>
+                  <td>期末考试</td>
+                  <td>2023-2024 第一学期</td>
+                  <td><span class="score-badge score-good">85</span></td>
+                  <td>3</td>
+                  <td>2023-12-28</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="线性代数"
+                      data-score="85"
+                      data-type="期末考试"
+                      data-semester="2023-2024 第一学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>软件工程</td>
+                  <td>项目</td>
+                  <td>2023-2024 第二学期</td>
+                  <td><span class="score-badge score-excellent">96</span></td>
+                  <td>5</td>
+                  <td>2024-05-20</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="软件工程"
+                      data-score="96"
+                      data-type="项目"
+                      data-semester="2023-2024 第二学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>概率统计</td>
+                  <td>期中考试</td>
+                  <td>2023-2024 第一学期</td>
+                  <td><span class="score-badge score-poor">58</span></td>
+                  <td>3</td>
+                  <td>2023-11-12</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="概率统计"
+                      data-score="58"
+                      data-type="期中考试"
+                      data-semester="2023-2024 第一学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>人工智能导论</td>
+                  <td>期末项目</td>
+                  <td>2023-2024 第二学期</td>
+                  <td><span class="score-badge score-excellent">93</span></td>
+                  <td>4</td>
+                  <td>2024-06-12</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="人工智能导论"
+                      data-score="93"
+                      data-type="期末项目"
+                      data-semester="2023-2024 第二学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>计算机图形学</td>
+                  <td>作业</td>
+                  <td>2024-2025 第一学期</td>
+                  <td><span class="score-badge score-good">89</span></td>
+                  <td>3</td>
+                  <td>2024-09-28</td>
+                  <td>
+                    <button
+                      class="btn-icon text-primary appeal-btn"
+                      data-course="计算机图形学"
+                      data-score="89"
+                      data-type="作业"
+                      data-semester="2024-2025 第一学期"
+                    >
+                      <i class="fas fa-gavel" title="申诉"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 成绩申诉记录 -->
+      <section class="grades-section">
+        <h2 class="section-title animate-on-scroll fade-up">成绩申诉记录</h2>
+        <div class="grades-card animate-on-scroll fade-up delay-100">
+          <div class="appeal-summary">
+            <div class="summary-item">
+              <div class="summary-value" id="total-appeals">0</div>
+              <div class="summary-label">申诉总数</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-value" id="pending-appeals">0</div>
+              <div class="summary-label">待处理</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-value" id="approved-appeals">0</div>
+              <div class="summary-label">已通过</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-value" id="rejected-appeals">0</div>
+              <div class="summary-label">已驳回</div>
+            </div>
+          </div>
+
+          <div id="appeals-container" class="appeals-wrapper">
+            <p class="empty-appeals-msg">暂无申诉记录</p>
+            <div id="appeals-list" class="appeals-list">
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- 页脚 -->
+    <footer class="footer"></footer>
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/components/scrollAnimation/scrollAnimation.js"></script>
+    <script type="module" src="/components/sidebar/sidebar.js"></script>
+    <script type="module" src="/components/header/header.js"></script>
+    <script type="module" src="/components/buttons/buttons.js"></script>
+    <script type="module" src="/components/footer/footer.js"></script>
+    <script type="module" src="/components/notifications/notifications.js"></script>
+    <script type="module" src="/js/themes.js"></script>
+    <script type="module" src="/js/pages/grades.js"></script>
+  </body>
+</html>

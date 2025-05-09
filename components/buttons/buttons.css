@@ -1,0 +1,700 @@
+/* ==========================================================================
+   按钮UI组件 - CSS样式
+   提供统一的按钮样式和交互效果
+   ========================================================================== */
+
+/* ==========================================================================
+   基础按钮样式 (Base Button Styles)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  /* 更平滑的过渡动画 */
+  transition: background-color 0.25s ease, 
+              color 0.2s ease, 
+              border-color 0.2s ease, 
+              box-shadow 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+  text-align: center;
+  line-height: 1.4;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  text-decoration: none;
+  white-space: nowrap;
+  /* 移除 will-change 中的 transform */
+  will-change: background-color, box-shadow; 
+}
+
+/* ==========================================================================
+   按钮尺寸变体 (Button Size Variants)
+   ========================================================================== */
+.btn-sm {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--border-radius-sm);
+}
+
+.btn-lg {
+  font-size: 1rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--border-radius);
+}
+
+.btn-xl {
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius-lg);
+}
+
+/* ==========================================================================
+   展开按钮样式 (Expandable Buttons)
+   ========================================================================== */
+.btn-expand {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* 横向展开按钮 */
+.btn-expand-horizontal {
+  min-width: 2.5rem;
+  max-width: 2.5rem;
+  white-space: nowrap;
+}
+
+.btn-expand-horizontal.expanded {
+  max-width: 15rem;
+  min-width: auto;
+}
+
+.btn-expand-horizontal .btn-expand-icon {
+  margin-left: 0;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+.btn-expand-horizontal.expanded .btn-expand-icon {
+  transform: rotate(180deg);
+}
+
+.btn-expand-horizontal .btn-expand-text {
+  opacity: 0;
+  width: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, width 0.3s ease, visibility 0.2s;
+}
+
+.btn-expand-horizontal.expanded .btn-expand-text {
+  opacity: 1;
+  width: auto;
+  visibility: visible;
+  margin-right: 0.5rem;
+}
+
+/* 竖向展开按钮 */
+.btn-expand-vertical {
+  height: 2.5rem;
+  max-height: 2.5rem;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.btn-expand-vertical.expanded {
+  height: auto;
+  max-height: 15rem;
+  justify-content: flex-start;
+}
+
+.btn-expand-vertical .btn-expand-icon {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.btn-expand-vertical.expanded .btn-expand-icon {
+  transform: rotate(180deg);
+}
+
+.btn-expand-vertical .btn-expand-content {
+  opacity: 0;
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  transition: opacity 0.2s ease, height 0.3s ease, visibility 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.btn-expand-vertical.expanded .btn-expand-content {
+  opacity: 1;
+  height: auto;
+  visibility: visible;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   按钮类型与颜色 (Button Types & Colors)
+   ========================================================================== */
+/* 主要按钮 */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  box-shadow: 0 2px 5px rgba(5, 147, 252, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* 次要按钮 */
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: white;
+  border-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+  background-color: #f59f20;
+  border-color: #f59f20;
+  box-shadow: 0 2px 5px rgba(249, 175, 67, 0.3);
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* 成功按钮 */
+.btn-success {
+  background-color: var(--success-color);
+  color: white;
+  border-color: var(--success-color);
+}
+
+.btn-success:hover {
+  background-color: #2ba97a;
+  border-color: #2ba97a;
+  box-shadow: 0 2px 5px rgba(49, 196, 141, 0.3);
+}
+
+.btn-success:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* 警告按钮 */
+.btn-warning {
+  background-color: var(--warning-color);
+  color: white;
+  border-color: var(--warning-color);
+}
+
+.btn-warning:hover {
+  background-color: #e59c01;
+  border-color: #e59c01;
+  box-shadow: 0 2px 5px rgba(253, 176, 34, 0.3);
+}
+
+.btn-warning:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* 危险按钮 */
+.btn-danger {
+  background-color: var(--danger-color);
+  color: white;
+  border-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+  background-color: #d12f2f;
+  border-color: #d12f2f;
+  box-shadow: 0 2px 5px rgba(229, 62, 62, 0.3);
+}
+
+.btn-danger:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   轮廓按钮 (Outline Buttons)
+   ========================================================================== */
+.btn-outline-primary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  box-shadow: 0 2px 5px rgba(5, 147, 252, 0.15);
+}
+
+.btn-outline-primary:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.btn-outline-secondary {
+  background-color: transparent;
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--secondary-light);
+  color: var(--secondary-color);
+  box-shadow: 0 2px 5px rgba(249, 175, 67, 0.15);
+}
+
+/* 轮廓成功按钮 */
+.btn-outline-success {
+  background-color: transparent;
+  color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.btn-outline-success:hover {
+  background-color: rgba(49, 196, 141, 0.1);
+  box-shadow: 0 2px 5px rgba(49, 196, 141, 0.15);
+}
+
+/* 轮廓警告按钮 */
+.btn-outline-warning {
+  background-color: transparent;
+  color: var(--warning-color);
+  border-color: var(--warning-color);
+}
+
+.btn-outline-warning:hover {
+  background-color: rgba(253, 176, 34, 0.1);
+  box-shadow: 0 2px 5px rgba(253, 176, 34, 0.15);
+}
+
+/* 轮廓危险按钮 */
+.btn-outline-danger {
+  background-color: transparent;
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.btn-outline-danger:hover {
+  background-color: rgba(229, 62, 62, 0.1);
+  box-shadow: 0 2px 5px rgba(229, 62, 62, 0.15);
+}
+
+/* 文本按钮 */
+.btn-text {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: none;
+  padding: 0.5rem 0.8rem;
+}
+
+.btn-text:hover {
+  background-color: rgba(5, 147, 252, 0.05);
+}
+
+.btn-text:active {
+  transform: translateY(1px);
+}
+
+/* ==========================================================================
+   按钮状态 (Button States)
+   ========================================================================== */
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.65;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.btn.btn-loading {
+  position: relative;
+  pointer-events: none; /* 加载时禁止点击 */
+}
+
+/* 隐藏按钮内容但保留空间 */
+.btn.btn-loading * {
+  visibility: hidden;
+}
+
+/* 加载状态指示器 */
+.btn.btn-loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: calc(50% - 8px);
+  left: calc(50% - 8px);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-top-color: white;
+  animation: button-spinner 0.8s linear infinite;
+  z-index: 1;
+}
+
+/* 针对轮廓按钮和浅色/深色按钮优化加载图标颜色 */
+.btn-outline-primary.btn-loading::after,
+.btn-outline-secondary.btn-loading::after,
+.btn-outline-success.btn-loading::after,
+.btn-outline-danger.btn-loading::after,
+.btn-outline-warning.btn-loading::after,
+.btn-outline-info.btn-loading::after,
+.btn-outline-light.btn-loading::after,
+.btn-outline-dark.btn-loading::after,
+.btn-light.btn-loading::after,
+.btn-dark.btn-loading::after {
+  border-color: rgba(0, 0, 0, 0.3);
+  border-top-color: rgba(0, 0, 0, 0.7);
+}
+
+/* 暗黑模式下按钮的加载图标 */
+[data-theme="dark"] .btn.btn-loading::after {
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes button-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   主题与响应式适配 (Themes & Responsive Adaptations)
+   ========================================================================== */
+/* 暗模式适配 */
+[data-theme="dark"] .btn-outline-primary:hover {
+  background-color: rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+  background-color: rgba(245, 158, 11, 0.15);
+}
+
+[data-theme="dark"] .btn-outline-success:hover {
+  background-color: rgba(16, 185, 129, 0.15);
+}
+
+[data-theme="dark"] .btn-outline-warning:hover {
+  background-color: rgba(245, 158, 11, 0.15);
+}
+
+[data-theme="dark"] .btn-outline-danger:hover {
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+/* ==========================================================================
+   按钮组样式 (Button Groups)
+   ========================================================================== */
+.btn-group {
+  display: inline-flex;
+  position: relative;
+}
+
+.btn-group .btn {
+  position: relative;
+  flex: 1 1 auto;
+}
+
+.btn-group .btn:not(:first-child) {
+  margin-left: -1px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.btn-group .btn:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.btn-group .btn:focus,
+.btn-group .btn:active {
+  z-index: 1;
+}
+
+/* 垂直按钮组 */
+.btn-group-vertical {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.btn-group-vertical .btn {
+  position: relative;
+  flex: 1 1 auto;
+}
+
+.btn-group-vertical .btn:not(:first-child) {
+  margin-top: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.btn-group-vertical .btn:not(:last-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* 块级按钮 */
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+/* ==========================================================================
+   响应式调整 (Responsive Adjustments) 
+   ========================================================================== */
+@media (max-width: 768px) {
+  .btn {
+    padding: 0.5rem 1rem;
+  }
+  
+  .btn-lg {
+    padding: 0.7rem 1.4rem;
+  }
+  
+  .btn-sm {
+    padding: 0.3rem 0.7rem;
+  }
+}
+
+/* ==========================================================================
+   可访问性增强 (Accessibility Enhancements)
+   ========================================================================== */
+/* 焦点状态 - 使用 :focus-visible 提高可访问性 */
+.btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.25); /* 更明显的阴影 */
+}
+
+/* 轮廓按钮的焦点状态 */
+.btn-outline-primary:focus-visible {
+  background-color: rgba(var(--primary-rgb), 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.25);
+}
+.btn-outline-secondary:focus-visible {
+  background-color: rgba(var(--secondary-rgb), 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--secondary-rgb), 0.25);
+}
+.btn-outline-success:focus-visible {
+  background-color: rgba(var(--success-rgb), 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--success-rgb), 0.25);
+}
+.btn-outline-danger:focus-visible {
+  background-color: rgba(var(--danger-rgb), 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--danger-rgb), 0.25);
+}
+.btn-outline-warning:focus-visible {
+  background-color: rgba(var(--warning-rgb), 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--warning-rgb), 0.25);
+}
+.btn-outline-info:focus-visible {
+  background-color: rgba(var(--info-rgb), 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--info-rgb), 0.25);
+}
+.btn-outline-light:focus-visible {
+  background-color: rgba(var(--light-rgb), 0.2); /* Light 需要更明显的背景 */
+  box-shadow: 0 0 0 3px rgba(var(--light-rgb), 0.25);
+}
+.btn-outline-dark:focus-visible {
+  background-color: rgba(var(--dark-rgb), 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--dark-rgb), 0.25);
+}
+
+/* 确保禁用按钮没有焦点样式 */
+.btn:disabled:focus-visible,
+.btn.disabled:focus-visible {
+  outline: none;
+  box-shadow: none;
+  background-color: initial; /* 重置可能应用的背景色 */
+}
+
+/* ==========================================================================
+   特殊类型按钮 (Special Button Types)
+   ========================================================================== */
+/* 计数器按钮 (Badge Button) */
+.btn-badge {
+  position: relative;
+  /* 确保按钮可以作为绝对定位的参考点 */
+  display: inline-flex;
+}
+
+/* 创建实际的徽章元素 */
+.btn-badge .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: var(--danger-color, #e53e3e);
+  color: white;
+  font-size: 0.7rem;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  pointer-events: none; /* 避免干扰按钮点击 */
+}
+
+/* 数字大于99时显示为99+ */
+.btn-badge[data-badge]:not([data-badge=""]):not([data-badge="0"]) {
+  /* 不需要额外的右边距 */
+}
+
+.btn-badge[data-badge="0"] {
+  display: inline-flex; /* 照常显示按钮，但不显示数字 */
+}
+
+.btn-badge[data-badge="0"]:after {
+  display: none;
+}
+
+/* 开关切换按钮 (Toggle Button) */
+.btn-toggle {
+  position: relative;
+  transition: all 0.3s ease;
+  min-width: 90px; /* 确保有足够空间显示状态文本 */
+}
+
+.btn-toggle:not(.active) {
+  background-color: var(--background-secondary);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.btn-toggle:not(.active):hover {
+  background-color: var(--background-tertiary);
+}
+
+.btn-toggle.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.btn-toggle[data-off-text]:not(.active):before {
+  content: attr(data-off-text);
+}
+
+.btn-toggle[data-on-text].active:before {
+  content: attr(data-on-text);
+}
+
+/* 提供不同颜色的切换按钮 */
+.btn-toggle-success.active {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.btn-toggle-danger.active {
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.btn-toggle-warning.active {
+  background-color: var(--warning-color);
+  border-color: var(--warning-color);
+}
+
+/* 颜色自适应功能 - 将在JavaScript中实现 */
+.btn[data-auto-color="true"] {
+  /* 这个类会由JS动态调整文本颜色 */
+}
+
+/* ==========================================================================
+   交互效果 (Interactive Effects)
+   ========================================================================== */
+/* 按钮悬停时只改变背景和阴影 */
+.btn:not(:disabled):not(.disabled):not(.btn-loading):hover {
+  /* 移除 transform: translateY(-2px); */
+  /* 可以保留或调整阴影效果 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.btn:not(:disabled):not(.disabled):active {
+  /* 移除 transform: translateY(0); */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease;
+}
+
+/* 触摸设备优化 */
+@media (hover: none) {
+  .btn:not(:disabled):not(.disabled):hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* ==========================================================================
+   导航按钮样式 (Navigation Button Styles)
+   来源：footer组件中的导航链接
+   用途：提供轻量级导航型按钮样式，适用于各种导航场景
+   ========================================================================== */
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 0.95rem;
+  padding: 0.3rem 0.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+/* 导航按钮悬停基础效果 */
+.btn-nav:hover {
+  color: var(--primary-color);
+}
+
+/* 带平移效果的导航按钮 */
+.btn-nav-slide:hover {
+  transform: translateX(5px);
+}
+
+/* 垂直方向平移的导航按钮（备用，面向未来扩展） */
+.btn-nav-vertical:hover {
+  transform: translateY(-3px);
+}
+
+/* 触摸设备优化 */
+@media (hover: none) {
+  .btn-nav:hover {
+    transform: none;
+  }
+}
