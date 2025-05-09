@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
       {
         text: "添加考试",
         url: "#",
-        id: "add-exam-header-btn"
+        id: "add-exam-header-btn",
+        className: "add-exam-btn"
       },
     ],
   });
