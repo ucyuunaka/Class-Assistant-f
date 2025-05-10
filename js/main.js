@@ -65,17 +65,20 @@ export function initTheme() {
   // 本地存储中获取主题
   const savedTheme = localStorage.getItem('theme');
   
-  if (savedTheme === 'dark') {
-    document.body.setAttribute('data-theme', 'dark');
+  // 如果存在已保存的主题，则应用它
+  if (savedTheme) {
+    document.body.setAttribute('data-theme', savedTheme);
   } else {
-    document.body.setAttribute('data-theme', 'light');
+    // 否则，应用默认主题
+    // 注意：这里不再强制设置为 'light'
+    document.body.setAttribute('data-theme', 'classic-blue-pink'); 
   }
+
   const fontScale = localStorage.getItem('fontScale');
   if (fontScale) {
     document.documentElement.style.fontSize = `${fontScale}rem`;
   }
   
-  // 监听主题变化事件（用于从设置页面切换主题时）
   window.addEventListener('themeChanged', function(e) {
     document.body.setAttribute('data-theme', e.detail.theme);
   });

@@ -257,16 +257,5 @@ export const ThemeManager = {
   }
 };
 
-/**
- * 切换主题函数 - 返回新的主题ID
- * @returns {string} 新的主题ID
- */
-export function toggleTheme() {
-  const currentTheme = document.body.getAttribute('data-theme') || 'light';
-  const newTheme = currentTheme === 'dark' ? 'classic-blue-pink' : 'dark';
-  ThemeManager.setTheme(newTheme);
-  return newTheme;
-}
-
 // 为了向后兼容，仍保留全局对象
 window.ThemeManager = ThemeManager;
