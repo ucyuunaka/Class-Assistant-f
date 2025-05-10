@@ -89,6 +89,7 @@ export function initScheduleEvents() {
     weekViewBtn.classList.remove("active");
     listViewContainer.style.display = "block";
     weekViewContainer.style.display = "none";
+    renderListView();
   });
 
   // 导出和清空事件

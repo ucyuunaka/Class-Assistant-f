@@ -342,7 +342,7 @@ export function renderListView() {
     listContainer.appendChild(dayCard);
   });
 
-  listContainer.scrollTop = scrollTop;
+listContainer.scrollTop = scrollTop;
 }
 
 /**
