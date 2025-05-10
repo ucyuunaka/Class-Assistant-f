@@ -10,47 +10,76 @@
 
 项目主要文件和目录结构如下：
 
-- `/`: 项目根目录
-  - `index.html`: 应用主页
-  - `README.md`: 项目说明文件
-  - `package.json`, `package-lock.json`: Node.js 包管理文件
-  - `vite.config.js`: Vite 配置文件
-  - `start-dev.bat`: Windows 开发启动脚本
-- `/components/`: 可重用组件
-  - `/components/buttons/`: 按钮组件
-  - `/components/footer/`: 页脚组件
-  - `/components/header/`: 头部组件
-  - `/components/modals/`: 模态框组件
-  - `/components/notifications/`: 通知组件
-  - `/components/scrollAnimation/`: 滚动动画组件
-  - `/components/sidebar/`: 侧边栏组件
-- `/css/`: 样式文件
-  - `styles.css`: 全局样式
-  - `themes/`: 主题样式
-  - `pages/`: 各页面特定样式
-- `/js/`: JavaScript 文件
-  - `main.js`: 应用主逻辑及通用工具函数（如日期格式化、防抖、本地存储封装、基础国际化）
-  - `auth.js`: 用户认证相关逻辑（首次登录流程检查）
-  - `themes.js`: 扩展主题系统逻辑（多种主题切换、本地存储集成）
-  - `pages/`: 各页面特定 JavaScript 逻辑
-    - `/js/pages/countdown/`: 考试倒计时页面逻辑
-    - `/js/pages/grades/`: 成绩管理页面逻辑（包含图表渲染、数据统计）
-    - `/js/pages/lesson/`: 课评速记页面逻辑
-    - `/js/pages/login/`: 登录/注册页面逻辑
-    - `/js/pages/profile/`: 个人资料页面逻辑
-    - `/js/pages/schedule/`: 课表管理页面逻辑（包含数据管理、渲染、事件处理、拖放）
-    - `/js/pages/settings/`: 设置页面逻辑
-- `/pages/`: 应用页面
-  - `countdown.html`: 考试倒计时页面
-  - `grades.html`: 成绩管理页面
-  - `lesson.html`: 课评速记页面
-  - `login.html`: 登录/注册页面
-  - `profile.html`: 个人资料页面
-  - `schedule.html`: 课表管理页面
-  - `settings.html`: 设置页面
-- `/public/`: 静态资源
-  - `/public/icons/`: 应用图标
-  - `/public/lib/`: 第三方库（如 Chart.js）
+```
+.
+├── .gitignore
+├── index.html             # 应用主入口 HTML 文件
+├── package-lock.json      # 项目依赖
+├── package.json           # 项目配置文件，包含项目依赖、脚本等信息
+├── README.md              # 项目说明文档
+├── start-dev.bat          # 【Windows环境】启动开发服务器的批处理脚本
+├── vite.config.js         # Vite 构建工具的配置文件
+├── components/            # 可复用的 UI 组件
+│   ├── buttons/           # 按钮组件相关文件 (CSS, JS)
+│   ├── footer/            # 页脚组件相关文件 (HTML, CSS, JS)
+│   ├── header/            # 顶栏组件相关文件 (CSS, JS)
+│   ├── modals/            # 模态框/弹窗组件相关文件 (CSS, JS)
+│   ├── notifications/     # 通知提示组件相关文件 (CSS, JS)
+│   ├── scrollAnimation/   # 滚动动画效果组件相关文件 (CSS, JS)
+│   └── sidebar/           # 侧边栏组件相关文件 (HTML, CSS, JS)
+├── css/                   # CSS 样式文件
+│   ├── styles.css         # 全局基础样式文件
+│   ├── pages/             # 各个页面的特定样式文件
+│   │   ├── countdown.css  # 考试倒计时页面的样式
+│   │   ├── grades.css     # 成绩管理页面的样式
+│   │   ├── index.css      # 主页的样式
+│   │   ├── lesson.css     # 课评速记页面的样式
+│   │   ├── login.css      # 登录注册页面的样式
+│   │   ├── profile.css    # 个人资料页面的样式
+│   │   ├── schedule.css   # 课表管理页面的样式
+│   │   └── settings.css   # 设置页面的样式
+│   └── themes/            # 主题相关的样式文件
+│       └── themes.css     # 定义不同主题的颜色等样式
+├── js/                    # JavaScript 脚本文件
+│   ├── auth.js            # 用户认证相关的逻辑 (登录、注册)
+│   ├── main.js            # 应用主逻辑文件，初始化和协调各模块
+│   ├── themes.js          # 主题切换相关的逻辑
+│   └── pages/             # 各个页面的特定 JavaScript 逻辑
+│       ├── countdown/     # 考试倒计时页面的 JS 文件
+│       │   ├── countdown.js             # 倒计时页面主逻辑
+│       │   ├── countdown_controller.js  # 倒计时控制器，处理用户交互
+│       │   ├── countdown_data.js        # 倒计时数据管理
+│       │   ├── countdown_events.js      # 倒计时事件处理
+│       │   └── countdown_render.js      # 倒计时页面渲染逻辑
+│       ├── grades.js      # 成绩管理页面的 JS 逻辑
+│       ├── index.js       # 主页的 JS 逻辑
+│       ├── lesson.js      # 课评速记页面的 JS 逻辑
+│       ├── login.js       # 登录注册页面的 JS 逻辑
+│       ├── profile.js     # 个人资料页面的 JS 逻辑
+│       ├── schedule/      # 课表管理页面的 JS 文件
+│       │   ├── schedule.js              # 课表页面主逻辑
+│       │   ├── schedule_cache.js        # 课表数据缓存处理
+│       │   ├── schedule_controller.js   # 课表控制器，处理用户交互
+│       │   ├── schedule_data.js         # 课表数据管理
+│       │   ├── schedule_drag.js         # 课表拖拽功能逻辑
+│       │   ├── schedule_events.js       # 课表事件处理
+│       │   └── schedule_render.js       # 课表页面渲染逻辑
+│       └── settings.js    # 设置页面的 JS 逻辑
+├── pages/                 # 存放各个功能页面的 HTML 文件
+│   ├── countdown.html     # 考试倒计时页面
+│   ├── grades.html        # 成绩管理页面
+│   ├── lesson.html        # 课评速记页面
+│   ├── login.html         # 登录注册页面
+│   ├── profile.html       # 个人资料页面
+│   ├── schedule.html      # 课表管理页面
+│   └── settings.html      # 设置页面
+└── public/                # 存放静态资源，会被直接复制到构建输出目录
+    ├── icons/             # 存放应用图标等图片资源
+    └── lib/               # 存放第三方库文件
+        └── chart.umd.min.js # Chart.js 图表库文件
+```
+
+项目主要文件和目录结构如上所示。
 
 ## 各页面内容
 
@@ -79,7 +108,7 @@
 
 我们提供两种方式来启动应用：
 
-**方式一：通过命令行 (推荐)**
+**方式一：通过命令行**
 
 1.  确保您已安装 Node.js 和 npm。
 2.  在项目根目录下打开终端。
