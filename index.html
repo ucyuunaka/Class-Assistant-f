@@ -4,32 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>课堂助手 - 你的学习管理伙伴</title>
+    <link rel="icon" href="/icons/logo_png_cropped.png" type="image/png" />
     <link rel="stylesheet" href="/css/styles.css" />
-    <!-- 不再引入侧边栏CSS，由组件自动加载 -->
-    <!-- 页脚样式现在也由组件自动加载 -->
-    <!-- 滚动动画样式现在也由组件自动加载 -->
-    <!-- 添加主题样式 -->
     <link rel="stylesheet" href="/css/themes/themes.css" />
-    <!-- 使用图标库 -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    <!-- 添加 Remix Icon 库，用于侧边栏图标 -->
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <!-- 添加页面特定样式 -->
     <link rel="stylesheet" href="/css/pages/index.css" />
-    <!-- 添加身份验证脚本 -->
     <script type="module" src="/js/auth.js"></script>
   </head>
   <body>
     <!-- 侧边栏导航 -->
     <div id="sidebar-container"></div>
 
-    <!-- 移动端菜单切换按钮 (由 JS 动态创建) -->
+    <!-- 移动端菜单切换按钮 -->
     <!-- 移动端遮罩层 -->
     <div class="sidebar-overlay"></div>
 
@@ -304,7 +297,6 @@
         </div>
       </section>
     </div>
-    <!-- 对应将 </main> 修改为 </div> -->
 
     <!-- 页脚 -->
     <footer class="footer"></footer>
@@ -322,17 +314,15 @@
         // 初始化顶栏组件 - 首页风格
         const header = new Header("header-container", {
           title: "让你的学习生活更高效有序",
-          subtitle: "课堂助手 - 让你专注于学习本身", // Subtitle is kept
+          subtitle: "课堂助手 - 让你专注于学习本身",
           buttons: [
             {
               text: "查看我的课表",
               url: "/pages/schedule.html",
-              // isPrimary removed
             },
             {
               text: "考试倒计时",
               url: "/pages/countdown.html",
-              // isPrimary and className removed
             },
           ],
         });
