@@ -277,25 +277,6 @@ export function initScheduleEvents() {
   }
 
   /**
-   * 显示删除确认对话框
-   * @param {string} courseId - 课程ID
-   */
-  function showDeleteConfirm(courseId) {
-    currentCourseToDelete = courseId;
-    // 使用 Modal.showExisting 显示已存在的模态窗口
-    window.Modal.showExisting(document.getElementById("delete-confirm-modal"));
-  }
-
-  /**
-   * 隐藏删除确认对话框
-   */
-  function hideDeleteConfirm() {
-    // 使用 Modal.hideExisting 隐藏已存在的模态窗口
-    window.Modal.hideExisting(document.getElementById("delete-confirm-modal"));
-    currentCourseToDelete = null;
-  }
-
-  /**
    * 显示清空课表确认对话框
    */
   function showClearConfirm() {
@@ -310,6 +291,25 @@ export function initScheduleEvents() {
     // 使用 Modal.hideExisting 隐藏已存在的模态窗口
     window.Modal.hideExisting(clearScheduleModal);
   }
+}
+
+/**
+ * 显示删除确认对话框
+ * @param {string} courseId - 课程ID
+ */
+function showDeleteConfirm(courseId) {
+  currentCourseToDelete = courseId;
+  // 使用 Modal.showExisting 显示已存在的模态窗口
+  window.Modal.showExisting(document.getElementById("delete-confirm-modal"));
+}
+
+/**
+ * 隐藏删除确认对话框
+ */
+function hideDeleteConfirm() {
+  // 使用 Modal.hideExisting 隐藏已存在的模态窗口
+  window.Modal.hideExisting(document.getElementById("delete-confirm-modal"));
+  currentCourseToDelete = null;
 }
 
 /**
